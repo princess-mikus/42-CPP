@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:32:10 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/06/12 14:00:27 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:03:09 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void    inter(char* str, int funciont(char c))
 std::string    str_to_mayus(char *str_org)
 {
     std::string str = str_org;
-    for (size_t i = 0; str_org[i]; i++)
+    for (size_t i = 0; i < str.length(); i++)
        str_org[i] = toupper(str_org[i]);
-    return (str_org);
+    return (str);
 }
 
 
