@@ -19,5 +19,17 @@ void	Harl::error() {
 }
 
 void	Harl::complain(std::string level) {
-	
+	void (Harl::*function_list[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string	level_list[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		if (level == level_list[i])
+		{
+			(this->*function_list[i])();
+			break;
+		}
+		if (i == 4)
+			std::cout << "I could do this all day, and I intend to! (Level not found)" << std::endl;
+	}
 }
