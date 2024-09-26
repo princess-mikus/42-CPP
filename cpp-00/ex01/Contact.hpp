@@ -10,36 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
 #include <iostream>
+#include <iomanip>
+#include <string>
 
 class Contact {
+
 	public:
    		Contact();
-		void	set_contact(size_t number, std::string name, std::string surname, std::string nick, std::string darkest_sec)
-		{
-			phone_number	= number;
-			first_name 		= name;
-			last_name 		= surname;
-			nickname		= nick;
-			darkest_secret	= darkest_sec;
-		};
-		void	get_contact_info()
-		{
-			std::cout << "Phone number:   " << phone_number << std::endl;
-			std::cout << "First Name:     " << first_name << std::endl;
-			std::cout << "Last  Name:     " << last_name << std::endl;
-			std::cout << "Nickname:       " << nickname << std::endl;
-			std::cout << "Darkest secret: " << darkest_secret << std::endl;
-		};
+		~Contact();
+		
+		void		add_to_contact(std::string *data);
+		void		print_contact_info();
+		std::string	get_first_name();
+		std::string	get_last_name();
+		std::string	get_nickname();
+		std::string	get_phone_number();
+		std::string	get_darkest_secret();
+
+	private:
 		std::string	first_name;
 		std::string	last_name;
 		std::string	nickname;
-	private:	
-		size_t		phone_number;
+		std::string	phone_number;
 		std::string	darkest_secret;
 };
 
-Contact::Contact()
-{
-	
-};
+#endif

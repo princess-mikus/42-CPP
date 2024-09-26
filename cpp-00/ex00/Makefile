@@ -10,19 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	:= megaphone
-CC		:= c++
-CFLAGS	:= -Wall -Wextra -Werror -std=c++98
-SRC		:=	megaphone
-CSRC	:= $(addsuffix .cpp, $(SRC))
+NAME = megaphone
+
+SRC = megaphone.cpp
+OBJ = $(SRC:.cpp=.o)
+CC = g++
+RM = rm -f
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) $(CSRC) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	@echo "Clean!!!"
-	@rm -rf $(NAME)
+	$(RM) $(OBJ)
 
-re: clean all
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean $(NAME)
+
+.PHONY: all clean fclean re

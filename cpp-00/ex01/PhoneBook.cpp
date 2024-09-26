@@ -11,137 +11,94 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
 
-bool	check_number(std::string input)
-{
-	for (size_t i = 0; i < input.length(); i++)
-	{
-		if (input[i] < '0' || input[i] > '9')
-			return (true);
-	}
-	return (false);
+PhoneBook::PhoneBook() {
+	stored_contacts = 0;
+	last_contact = 0;
 }
 
-bool	check_text(std::string input)
-{
+PhoneBook::~PhoneBook() {
 
-	for (size_t i = 0; i < input.length(); i++)
-	{
-		if (input[i] >= '0' && input[i] <= '9')
-			return (true);
-	}
-	return (false);
 }
 
-void	add_to_phonebook(PhoneBook *phonebook)
-{
-	const std::string message[5] = {"Phone Number: ", "First Name: ", "Last Name: ", "Nickname: ", "your darkest secret: "};
-	int			number;
-	std::string	data[4];
+void	PhoneBook::add_contact() {
+	const std::string message[5] = {"First Name: ", "Last Name: ", "Nickname: ", "Phone Number: ", "your darkest secret: "};
+	std::string	data[5];
 	std::string	input;
-	bool		error;
+	bool		error = false;
 
 	for (int i = 0; i < 5; i++)
 	{
 		std::cout << "Insert " + message[i] + '\n';
 		std::getline(std::cin, input);
-		if (!input[0])
+		if (!input[0] || (i == 3 && !is_number(input)))
 			error = true;
-		else if (i == 0)
-			error = check_number(input);
-		else
-			error = check_text(input);
 		if (error)
 		{
 			std::cerr << "Error! Not valid input" << std::endl;
 			break;
 		}
-		else if (i == 0)
-			number = std::atoi(input.c_str());
-		else
-			data[i - 1] = input;
+		data[i] = input;
 	}
 	if (!error)
 	{
-		if (phonebook->last_contact < 8)
-		{
-			phonebook->stored_contacts++;
-			phonebook->last_contact++;
-		}
+		contacts[last_contact].add_to_contact(data);
+		if (last_contact < 7)
+			last_contact++;
 		else
-			phonebook->last_contact = 1;
-		phonebook->contacts[phonebook->last_contact - 1].set_contact(\
-			number, data[0], data[1], data[2], data[3]);
-		std::cerr << "CONTACT ADDED" << std::endl;
+			last_contact = 0;
+		if (stored_contacts < 8)
+			stored_contacts++;
 	}
 }
 
-void	print_to_ten(std::string to_print)
-{
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (i == 9 && i < to_print.length())
-			std::cout << ".";
-		else if (i < to_print.length())
-			std::cout << to_print[i];
-		else
-			std::cout << " ";
-	}
-	std::cout << " | ";
-}
+void	PhoneBook::search_contact() {
+	std::string	index;
+	std::string (Contact::*getter_list[])(void) = {&Contact::get_first_name, &Contact::get_last_name, &Contact::get_nickname};
 
-void	search_for_contact(PhoneBook *phonebook)
-{
-	std::string	number;
 
-	if (phonebook->stored_contacts == 0)
+	if (stored_contacts < 1)
 	{
-		std::cout << "No contacts saved yet" << std::endl;
+		std::cout << "No contacts saved!" << std::endl;
 		return;
 	}
-	std::cout << " ___________________________________________________" << std::endl;
-	std::cout << "| ";
-	print_to_ten("  index");
-	print_to_ten(" f. name");
-	print_to_ten(" l. name");
-	print_to_ten(" nickname");
-	std::cout << std::endl;
-	for (int i = 0; i < phonebook->stored_contacts; i++)
+	std::cout << " ___________________________________________" << std::endl;
+	std::cout << "|";
+	std::cout << std::setw(10) << "index";
+	std::cout << "|";
+	std::cout << std::setw(10) << "f. name";
+	std::cout << "|";
+	std::cout << std::setw(10) << "l. name";
+	std::cout << "|"; 
+	std::cout << std::setw(10) << "nickname";
+	std::cout << "|" << std::endl;
+	for (int i = 0; i < stored_contacts; i++)
 	{
-		std::cout << "| ";
-		print_to_ten(std::to_string(i + 1));
-		print_to_ten(phonebook->contacts[i].first_name);
-		print_to_ten(phonebook->contacts[i].last_name);
-		print_to_ten(phonebook->contacts[i].nickname);
+		std::cout << "|";
+		std::cout << std::setw(10) << std::right << i << "|";
+		for (int j = 0; j < 3; j++) {
+			if ((contacts[i].*getter_list[j])().length() < 10)
+				std::cout << std::setw(10) << std::right << (contacts[i].*getter_list[j])() << "|";
+			else
+				std::cout << std::setw(10) << std::right << (contacts[i].*getter_list[j])().substr(0, 9) + "." << "|";
+		}
 		std::cout << std::endl;
 	}
-	if (phonebook->stored_contacts != 0)
-		std::cout << " ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯" << std::endl;
-	std::cout << "Please insert contact number" << std::endl;
-	std::getline(std::cin, number);
-	if (std::atoi(number.c_str()) > 8 || std::atoi(number.c_str()) < 1)
-		std::cout << "ERROR! Bad number" << std::endl;
-	else if (std::atoi(number.c_str()) > phonebook->stored_contacts)
-		std::cout << "Not a contact for that index!" << std::endl;
+	std::cout << " ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯" << std::endl;
+	std::cout << "Insert contact number" << " (0 - " << stored_contacts - 1 << ")" << std::endl;
+	std::string	input;
+	std::getline(std::cin, input);
+	if (input.length() <= 1 && input[0] - 48 < stored_contacts && is_number(input))
+		contacts[input[0] - 48].print_contact_info();
 	else
-		phonebook->contacts[std::atoi(number.c_str()) - 1].get_contact_info();
+		std::cout << "Not valid contact!" << std::endl;
 }
 
-int	main(void)
-{
-	PhoneBook	phonebook;
-	std::string	line;
-	
-	while (true)
+bool	is_number(std::string to_check) {
+	for (int i = 0; i < to_check.length(); i++)
 	{
-		std::cout << "> ";
-		std::getline(std::cin, line);
-		if (!line[0] || line.compare("EXIT") == 0)
-			break;
-		if (line.compare("ADD") == 0)
-			add_to_phonebook(&phonebook);
-		if (line.compare("SEARCH") == 0) 
-			search_for_contact(&phonebook);
+		if (to_check[i] - 48 < 0 || to_check[i] - 48 > 9)
+			return (false);
 	}
+	return (true);
 }

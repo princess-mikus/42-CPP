@@ -16,7 +16,7 @@ std::string	str_to_mayus(char *str_org)
 {
 	std::string str = str_org;
 	for (size_t i = 0; i < str.length(); i++)
-	   str[i] = toupper(str_org[i]);
+	   str[i] = std::toupper(str_org[i]);
 	return (str);
 }
 

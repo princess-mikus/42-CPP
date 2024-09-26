@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 12:54:03 by mikus             #+#    #+#             */
-/*   Updated: 2024/07/15 16:28:49 by mikus            ###   ########.fr       */
+/*   Created: 2024/06/19 12:56:27 by mikus             #+#    #+#             */
+/*   Updated: 2024/07/15 16:34:11 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "PhoneBook.hpp"
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include "Contact.hpp"
-
-class PhoneBook
+int	main(void)
 {
-public:
-	PhoneBook();
-	~PhoneBook();
-
-	void	add_contact();
-	void	search_contact();
-
-private:
-	Contact contacts[8];
-	int		stored_contacts;
-	int		last_contact;
-};
-
-
-bool	is_number(std::string input);
-
-#endif
+	PhoneBook	phonebook;
+	std::string	line;
+	
+	while (true)
+	{
+		std::cout << "> ";
+		std::getline(std::cin, line);
+		if (line.compare("EXIT") == 0)
+			break;
+		if (line.compare("ADD") == 0)
+			phonebook.add_contact();
+		if (line.compare("SEARCH") == 0) 
+			phonebook.search_contact();
+	}
+}
