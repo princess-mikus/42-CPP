@@ -1,12 +1,11 @@
 #include "Harl.hpp"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	Harl	Max;
 
-	Max.complain("DEBUG");
-	Max.complain("INFO");
-	Max.complain("WARNING");
-	Max.complain("ERROR");
-	Max.complain("Whatever");
+	if (argc != 2)
+		return (2);
+	Max.filter(argv[1]);
+	return (0);
 }

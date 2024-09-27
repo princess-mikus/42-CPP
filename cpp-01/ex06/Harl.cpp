@@ -37,3 +37,29 @@ void	Harl::complain(std::string level) {
 			std::cout << "I could do this all day, and I intend to! (Level not found)" << std::endl;
 	}
 }
+
+void	Harl::filter(std::string level) {
+	std::string	level_list[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	int	i = 0;
+
+	while (level_list[i] != level && i < 4)
+		i++;
+
+	switch (i) {
+		case 0:
+			complain("DEBUG");
+			/* fallthrough */
+		case 1:
+			complain("INFO");
+			/* fallthrough */
+		case 2:
+			complain("WARNING");
+			/* fallthrough */
+		case 3:
+			complain("ERROR");
+			break;
+		default:
+			complain("Unknown");
+		
+	}
+}
