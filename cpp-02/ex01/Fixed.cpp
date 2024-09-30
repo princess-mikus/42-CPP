@@ -5,6 +5,12 @@ Fixed::Fixed() {
 }
 
 Fixed::Fixed(const int num) {
+	std::cout << "Int constructor called" << std::endl;
+	val = roundf(num * (1 << frac));
+}
+
+Fixed::Fixed(const float num) {
+	std::cout << "Float constructor called" << std::endl;
 	val = roundf(num * (1 << frac));
 }
 
@@ -13,6 +19,14 @@ Fixed::Fixed(const Fixed &to_copy) {
 		return ;
 	std::cout << "Copy constructor called" << std::endl;
 	val = to_copy.val;
+}
+
+int		Fixed::toInt(void) const {
+	return (val / (1 << frac));
+}
+
+float	Fixed::toFloat(void) const {
+	return (roundf(val) / (1 << frac));
 }
 
 Fixed	&Fixed::operator=(const Fixed &to_copy) {
@@ -35,4 +49,9 @@ int	Fixed::getRawBits() const {
 
 void	Fixed::setRawBits(int const raw) {
 	val = raw;
+}
+
+std::ostream &operator<<(std::ostream &num, const Fixed &fixed_num) {
+	num << fixed_num.toFloat();
+	return (num);
 }
