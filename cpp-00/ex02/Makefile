@@ -6,7 +6,7 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 12:54:36 by fcasaubo          #+#    #+#              #
-#    Updated: 2024/09/17 13:27:28 by fcasaubo         ###   ########.fr        #
+#    Updated: 2024/09/30 11:58:47 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = accounting
 
 SRC =	Account		\
 		tests
+
 SRCS =	$(addsuffix .cpp, $(SRC))
 OBJ =	$(SRCS:.cpp=.o)
 

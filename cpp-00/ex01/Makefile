@@ -6,32 +6,35 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 12:54:36 by fcasaubo          #+#    #+#              #
-#    Updated: 2024/09/17 13:27:28 by fcasaubo         ###   ########.fr        #
+#    Updated: 2024/09/30 11:58:54 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
-
-SRC =	main			\
-		PhoneBook		\
-		Contact
-SRCS =	$(addsuffix .cpp, $(SRC))
-OBJ =	$(SRCS:.cpp=.o)
-
 CC = c++
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
+SRC =	main			\
+		PhoneBook		\
+		Contact
+
+SRCS =	$(addsuffix .cpp, $(SRC))
+OBJ =	$(SRCS:%.cpp=%.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	@$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean $(NAME)
 

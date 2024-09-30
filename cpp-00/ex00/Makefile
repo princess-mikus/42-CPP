@@ -6,23 +6,29 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 12:54:36 by fcasaubo          #+#    #+#              #
-#    Updated: 2024/09/17 13:27:28 by fcasaubo         ###   ########.fr        #
+#    Updated: 2024/09/30 11:58:59 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
-SRC = megaphone.cpp
-OBJ = $(SRC:.cpp=.o)
-CC = g++
+CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRC	= 	megaphone
+
+SRCS =	$(addsuffix .cpp, $(SRC))
+OBJ =	$(SRCS:%.cpp=%.o)
 
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	$(RM) $(OBJ)

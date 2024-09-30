@@ -6,17 +6,18 @@
 #    By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 12:54:36 by fcasaubo          #+#    #+#              #
-#    Updated: 2024/09/30 12:10:08 by fcasaubo         ###   ########.fr        #
+#    Updated: 2024/09/30 12:19:15 by fcasaubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brain
+NAME = harl
 
 CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC	= 	main
+SRC	= 	main	\
+		Harl
 
 SRCS =	$(addsuffix .cpp, $(SRC))
 OBJ =	$(SRCS:%.cpp=%.o)
