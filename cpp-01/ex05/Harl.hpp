@@ -1,10 +1,15 @@
+#ifndef HARL_HPP
+#define HARL_HPP
+
 #include <string>
 #include <iostream>
 
-#ifndef HARL_HPP
-#define HARL_HPP
 class Harl {
 	public:
+		/* CONSTRUCTORS AND DESTRUCTORS */
+		Harl();
+		~Harl();
+
 		void	debug(void);
 		void	info(void);
 		void	warning(void);

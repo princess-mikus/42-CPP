@@ -6,8 +6,8 @@ public:
 	ClapTrap();
 	ClapTrap(std::string new_name);
 	ClapTrap(const ClapTrap &to_copy);
-	ClapTrap	&operator=(const ClapTrap &to_copy);
 	~ClapTrap();
+	ClapTrap	&operator=(const ClapTrap &to_copy);
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);

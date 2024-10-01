@@ -1,5 +1,13 @@
 #include "Harl.hpp"
 
+Harl::Harl() {
+
+}
+
+Harl::~Harl() {
+	
+}
+
 /* Every output here is a phrase from Sam and Max. If you haven't go and play it */
 
 void	Harl::debug() {
