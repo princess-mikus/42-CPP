@@ -9,10 +9,10 @@ HumanB::HumanB(std::string new_name) {
 }
 
 void	HumanB::setWeapon(Weapon &new_weapon) {
-	myWeapon = &new_weapon;
+	weapon = &new_weapon;
 }
 
 void	HumanB::attack() {
-	std::cout << name << " attacks with their " << myWeapon->getType() << std::endl;
+	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
 }
 

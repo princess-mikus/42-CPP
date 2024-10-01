@@ -4,11 +4,9 @@ HumanA::~HumanA() {
 	
 }
 
-HumanA::HumanA(std::string new_name, Weapon &new_weapon) {
-	name = new_name;
-	myWeapon = &new_weapon;
+HumanA::HumanA(std::string new_name, Weapon &new_weapon): name(new_name), weapon(new_weapon) {
 }
 
 void	HumanA::attack() {
-	std::cout << name << " attacks with their " << myWeapon->getType() << std::endl;
+	std::cout << name << " attacks with their " << weapon.getType() << std::endl;
 }

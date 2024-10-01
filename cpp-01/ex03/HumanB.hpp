@@ -9,5 +9,5 @@ class HumanB {
 		void	attack();
 	private:
 		std::string			name;
-		class Weapon		*myWeapon = nullptr;
+		class Weapon		*weapon = nullptr;
 };

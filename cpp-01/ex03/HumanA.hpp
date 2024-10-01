@@ -7,6 +7,6 @@ class HumanA {
 		~HumanA();
 		void	attack();
 	private:
-		std::string	name;
-		class Weapon		*myWeapon;
+		std::string		name;
+		class Weapon	&weapon;
 };
