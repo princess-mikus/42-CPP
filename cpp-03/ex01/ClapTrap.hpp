@@ -1,3 +1,6 @@
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
+
 #include <iostream>
 
 class ClapTrap
@@ -15,6 +18,10 @@ public:
 	int			getHealth() const;
 	int			getEnergy() const;
 	int			getAttDmg() const;
+	void		setName(std::string);
+	void		setHealth(int);
+	void		setEnergy(int);
+	void		setAttDmg(int);
 
 private:
 	std::string	name;
@@ -23,3 +30,4 @@ private:
 	int			attack_damage;
 };
 
+#endif

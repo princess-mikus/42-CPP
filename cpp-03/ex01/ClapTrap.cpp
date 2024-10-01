@@ -13,7 +13,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() {
-	std::cout << "Default constructor called! (Shouldn't)" << std::endl;
+	std::cout << "ClapTrap Default constructor called!" << std::endl;
 	name = "";
 	hit_points = 10;
 	energy_points = 10;
@@ -21,7 +21,7 @@ ClapTrap::ClapTrap() {
 }
 
 ClapTrap::ClapTrap(std::string new_name) {
-	std::cout << "Name constructor called!" << std::endl;
+	std::cout << "ClapTrap Name constructor called!" << std::endl;
 	name = new_name;
 	hit_points = 10;
 	energy_points = 10;
@@ -31,7 +31,7 @@ ClapTrap::ClapTrap(std::string new_name) {
 ClapTrap::ClapTrap(const ClapTrap &to_copy) {
 	if (this == &to_copy)
 		return ;
-	std::cout << "Copy constructor called!" << std::endl;
+	std::cout << "ClapTrap Copy constructor called!" << std::endl;
 	name = to_copy.getName();
 	hit_points = to_copy.getHealth();
 	energy_points = to_copy.getEnergy();
@@ -41,7 +41,7 @@ ClapTrap::ClapTrap(const ClapTrap &to_copy) {
 ClapTrap	&ClapTrap::operator=(const ClapTrap &to_copy) {
 	if (this == &to_copy)
 		return (*this);
-	std::cout << "Copy assignment called!" << std::endl;
+	std::cout << "ClapTrap Copy assignment called!" << std::endl;
 	name = to_copy.getName();
 	hit_points = to_copy.getHealth();
 	energy_points = to_copy.getEnergy();
@@ -108,4 +108,20 @@ int			ClapTrap::getEnergy() const {
 
 int			ClapTrap::getAttDmg() const {
 	return (attack_damage);
+}
+
+void		ClapTrap::setName(std::string new_name) {
+	name = new_name;
+}
+
+void		ClapTrap::setHealth(int new_hitpoints) {
+	hit_points = new_hitpoints;
+}
+
+void		ClapTrap::setEnergy(int new_energypoints) {
+	energy_points = new_energypoints;
+}
+
+void		ClapTrap::setAttDmg(int new_attackdamage) {
+	attack_damage = new_attackdamage;
 }

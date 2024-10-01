@@ -13,7 +13,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() {
-	std::cout << "Default constructor called! (Shouldn't)" << std::endl;
+	std::cout << "Default constructor called!" << std::endl;
 	name = "";
 	hit_points = 10;
 	energy_points = 10;
