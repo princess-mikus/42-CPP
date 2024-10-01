@@ -1,21 +1,27 @@
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 #include <string>
 #include <iostream>
 #include <cmath>
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
 class Fixed {
 	public:
+		/* CONSTRUCTORS AND DESTRUCTORS */
 		Fixed();
 		Fixed(const int num);
 		Fixed(const float num);
 		Fixed(const Fixed &to_copy);
 		~Fixed();
 		Fixed	&operator=(const Fixed &to_copy);
-		int		toInt(void)	const;
-		float	toFloat(void) const;
+
+		/* GETTERS*/
 		int 	getRawBits(void) const;
+
+		/* SETTERS*/
 		void	setRawBits(int const raw);
+	
+		/* OPERATOR OVERLOADING */
 		bool	operator>(const Fixed &second);
 		bool	operator<(const Fixed &second);
 		bool	operator>=(const Fixed &second);
@@ -30,6 +36,9 @@ class Fixed {
 		Fixed	operator++(int);
 		Fixed	&operator--();
 		Fixed	operator--(int);
+
+		int		toInt(void)	const;
+		float	toFloat(void) const;
 		static	Fixed &min(Fixed &n1, Fixed &n2);
 		static	Fixed &min(const Fixed &n1, const Fixed &n2);
 		static	Fixed &max(Fixed &n1, Fixed &n2);

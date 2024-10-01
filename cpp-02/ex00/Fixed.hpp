@@ -1,18 +1,26 @@
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 #include <string>
 #include <iostream>
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
 class Fixed {
 	public:
+		/* CONSTRUCTORS AND DESTRUCTROS */
 		Fixed();
 		Fixed(const Fixed &to_copy);
 		~Fixed();
 		Fixed	&operator=(const Fixed &to_copy);
-		int getRawBits(void) const;
+
+		/* SETTERS */
 		void setRawBits(int const raw);
+
+		/* GETTERS */
+		int getRawBits(void) const;
+
 	private:
 		int					val = 0;
 		static const int	frac = 8;
 };
+
 #endif
