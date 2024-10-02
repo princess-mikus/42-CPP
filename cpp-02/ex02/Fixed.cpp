@@ -103,23 +103,23 @@ Fixed	&Fixed::operator/(const Fixed &second) {
 	return (*this);
 }
 
-Fixed &Fixed::operator++() {
+Fixed	&Fixed::operator++() {
 	this->val += 1;
 	return (*this);
 }
 
-Fixed Fixed::operator++(int) {
+Fixed	Fixed::operator++(int) {
 	Fixed temp(*this);
 	this->val += 1;
 	return (temp);
 }
 
-Fixed &Fixed::operator--() {
+Fixed	&Fixed::operator--() {
 	this->val -= 1;
 	return (*this);
 }
 
-Fixed Fixed::operator--(int) {
+Fixed	Fixed::operator--(int) {
 	Fixed temp(*this);
 	this->val -= 1;
 	return (temp);
