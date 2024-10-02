@@ -18,8 +18,7 @@ std::string	replace_line(std::string line, std::string to_replace, std::string n
 }
 
 int	main(int argc, char **argv) {
-	if (argc < 4)
-	{
+	if (argc < 4) {
 		std::cout << "Wrong number of arguments" << std::endl;
 		return 0;
 	}
@@ -27,20 +26,22 @@ int	main(int argc, char **argv) {
 	std::ofstream	outfile;
 
 	infile.open(argv[1], std::ios::in);
-	if (!infile.is_open())
-	{
+	if (!infile.is_open()) {
 		std::cout << "The file has not been opened, either due to lack of permissions or because it doesn't exist!" << std::endl;
-		return 0;
+		return 2;
 	}
 	outfile.open((std::string)argv[1] + ".replace", std::ios::out);
-	if (!outfile.is_open())
-	{
+	if (!outfile.is_open()) {
 		std::cout << "The outfile could not be created, either due to lack of permissions or lack of space!" << std::endl;
 		infile.close();
-		return 0;
+		return 2;
 	}
 	for (std::string line; std::getline(infile, line);)
-		outfile << replace_line(line, argv[2], argv[3]) << std::endl;
+	{
+		outfile << replace_line(line, argv[2], argv[3]);
+		if (!infile.eof())
+			outfile << std::endl;
+	}
 	infile.close();
 	outfile.close();
 	return 0;
