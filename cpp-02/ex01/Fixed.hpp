@@ -22,6 +22,7 @@ class Fixed {
 
 		int		toInt(void)	const;
 		float	toFloat(void) const;
+
 	private:
 		int					val = 0;
 		static const int	frac = 8;

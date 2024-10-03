@@ -43,6 +43,7 @@ class Fixed {
 		static	Fixed &min(const Fixed &n1, const Fixed &n2);
 		static	Fixed &max(Fixed &n1, Fixed &n2);
 		static	Fixed &max(const Fixed &n1, const Fixed &n2);
+
 	private:
 		int					val = 0;
 		static const int	frac = 8;
