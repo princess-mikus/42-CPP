@@ -23,7 +23,7 @@ public:
 	void		setEnergy(int);
 	void		setAttDmg(int);
 
-private:
+protected:
 	std::string	name;
 	int			hit_points;
 	int			energy_points;

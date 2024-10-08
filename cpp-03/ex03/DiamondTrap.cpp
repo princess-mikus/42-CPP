@@ -38,6 +38,7 @@ DiamondTrap	&DiamondTrap::operator=(const DiamondTrap &to_copy) {
 	std::cout << "DiamondTrap Copy assignment called!" << std::endl;
 	if (this == &to_copy)
 		return (*this);
+	ClapTrap::setName(to_copy.getName() + "_clap_name");
 	setName(to_copy.getName());
 	setHealth(to_copy.getHealth());
 	setEnergy(to_copy.getEnergy());
