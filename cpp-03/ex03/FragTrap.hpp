@@ -4,7 +4,8 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap {
+
+class FragTrap : virtual public ClapTrap {
 	public:
 		FragTrap();
 		FragTrap(std::string new_name);
@@ -13,7 +14,6 @@ class FragTrap : public ClapTrap {
 		FragTrap	&operator=(const FragTrap &to_copy);
 		void	highFivesGuys(void);
 	private:
-
 };
 
 #endif

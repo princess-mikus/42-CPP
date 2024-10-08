@@ -4,7 +4,7 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
 	public:
 		ScavTrap();
 		ScavTrap(std::string new_name);
@@ -14,7 +14,6 @@ class ScavTrap : public ClapTrap {
 		void attack(std::string);
 		void guardGate();
 	private:
-
 };
 
 #endif

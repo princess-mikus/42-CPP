@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:31:32 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/09/30 13:34:24 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:23:38 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap() {
 	std::cout << "Default constructor called!" << std::endl;
-	name = "";
+	name = "?";
 	hit_points = 10;
 	energy_points = 10;
 	attack_damage = 0;

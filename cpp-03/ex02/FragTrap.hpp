@@ -14,7 +14,6 @@ class FragTrap : public ClapTrap {
 		FragTrap	&operator=(const FragTrap &to_copy);
 		void	highFivesGuys(void);
 	private:
-
 };
 
 #endif
