@@ -2,9 +2,10 @@
 #define DOG_HPP
 
 #include <iostream>
-#include "Animal.hpp"
+#include "Brain.hpp"
+#include "AAnimal.hpp"
 
-class Dog: public Animal {
+class Dog: public AAnimal {
 	public:
 		Dog();
 		Dog(const Dog &to_copy);
@@ -12,7 +13,7 @@ class Dog: public Animal {
 		Dog	&operator=(const Dog &to_copy);
 		void	makeSound() const;
 	private:
-
+		Brain	*brain;
 };
 
 #endif

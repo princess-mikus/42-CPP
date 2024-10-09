@@ -2,6 +2,7 @@
 
 Dog::Dog(): Animal() {
 	std::cout << "Dog default constructor called" << std::endl;
+	brain = new Brain();
 	type = "Dog";
 }
 
@@ -22,6 +23,7 @@ Dog	&Dog::operator=(const Dog &to_copy) {
 
 Dog::~Dog() {
 	std::cout << "Dog destructor called" << std::endl;
+	delete brain;
 }
 
 void	Dog::makeSound() const {
