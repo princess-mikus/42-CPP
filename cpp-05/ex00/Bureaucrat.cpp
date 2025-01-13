@@ -42,12 +42,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat &model): _name(model._name)
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &model)
 {
-	if (this == &model)
-		return (*this);
-	*this = Bureaucrat(model);
+	_grade = model._grade;
 	return (*this);
 }
-
 
 /*--------------------------------------------------------------*/
 /*							GETTERS								*/
@@ -97,22 +94,12 @@ Bureaucrat::GradeTooLowException::GradeTooLowException()
 	
 }
 
-Bureaucrat::GradeTooLowException::~GradeTooLowException()
-{
-	
-}
-
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Exception on Bureaucrat grade: too low. Terminating");
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-{
-	
-}
-
-Bureaucrat::GradeTooHighException::~GradeTooHighException()
 {
 	
 }

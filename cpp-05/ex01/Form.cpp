@@ -27,6 +27,10 @@ Form::Form(std::string name, int sign_grade, int execute_grade): _name(name), _s
 		throw Form::GradeTooLowException();
 	if (sign_grade > 150)
 		throw Form::GradeTooHighException();
+	if (execute_grade < 1)
+		throw Form::GradeTooLowException();
+	if (execute_grade > 150)
+		throw Form::GradeTooHighException();
 	_signed = false;
 }
 
@@ -37,10 +41,9 @@ Form::Form(const Form &model): _name(model._name), _signed(false), _sign_grade(m
 
 Form	&Form::operator=(const Form &model)
 {
-	if (this == &model)
-		return (*this);
-	*this = Form(model);
-	return (*this);
+	/* This operator makes no sense */
+	_signed = model._signed;
+	return *this;
 }
 
 Form::~Form()
@@ -87,9 +90,12 @@ std::ostream	&operator<<(std::ostream &stream, const Form &model)
 	return (stream);
 }
 
-void	Form::beSigned(const Bureaucrat)
+void	Form::beSigned(const Bureaucrat	&bureaucrat)
 {
-	
+	std::cout << bureaucrat.getGrade() << this->_sign_grade << std::endl;
+	if (bureaucrat.getGrade() > this->_sign_grade)
+		throw Form::GradeTooLowException();
+	_signed = true;
 }
 
 /*--------------------------------------------------------------*/
@@ -101,22 +107,12 @@ Form::GradeTooLowException::GradeTooLowException()
 	
 }
 
-Form::GradeTooLowException::~GradeTooLowException()
-{
-	
-}
-
 const char* Form::GradeTooLowException::what() const throw()
 {
 	return ("Exception on Form grade: too low. Terminating");
 }
 
 Form::GradeTooHighException::GradeTooHighException()
-{
-	
-}
-
-Form::GradeTooHighException::~GradeTooHighException()
 {
 	
 }

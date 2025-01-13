@@ -12,6 +12,8 @@
 
 #include "Bureaucrat.hpp"
 
+class Form;
+
 /*--------------------------------------------------------------*/
 /*				CONSTRUCTORS AND DESTRUCTORS					*/
 /*--------------------------------------------------------------*/
@@ -42,12 +44,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat &model): _name(model._name)
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &model)
 {
-	if (this == &model)
-		return (*this);
-	*this = Bureaucrat(model);
+	_grade = model._grade;
 	return (*this);
 }
-
 
 /*--------------------------------------------------------------*/
 /*							GETTERS								*/
@@ -88,16 +87,22 @@ std::ostream	&operator<<(std::ostream &stream, const Bureaucrat &model)
 	return (stream);
 }
 
+void	Bureaucrat::signForm(const Form &form) const {
+	try {
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	}
+	catch (const std::exception &e) {
+		std::cout << this->getName() << " can't sign form " << form.getName() << " because it's beyond it's jurisdiction ( rank difference = " << this->getGrade() - form.getSignGrade() << ")" << std::endl;
+		//throw Bureaucrat::GradeTooLowException();
+	}
+}
+
 /*--------------------------------------------------------------*/
 /*							EXCEPTIONS							*/
 /*--------------------------------------------------------------*/
 
 Bureaucrat::GradeTooLowException::GradeTooLowException()
-{
-	
-}
-
-Bureaucrat::GradeTooLowException::~GradeTooLowException()
 {
 	
 }
@@ -108,11 +113,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-{
-	
-}
-
-Bureaucrat::GradeTooHighException::~GradeTooHighException()
 {
 	
 }

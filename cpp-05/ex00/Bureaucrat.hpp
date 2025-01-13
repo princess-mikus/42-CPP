@@ -40,14 +40,12 @@ class Bureaucrat
 		{
 			public:
 				GradeTooLowException();
-				~GradeTooLowException();
 				const char* what() const throw();
 		};
 		class GradeTooHighException: public std::exception
 		{
 			public:
 				GradeTooHighException();
-				~GradeTooHighException();
 				const char* what() const throw();
 		};
 };
