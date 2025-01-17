@@ -12,7 +12,7 @@
 
 #include "Bureaucrat.hpp"
 
-class Form;
+class AForm;
 
 /*--------------------------------------------------------------*/
 /*				CONSTRUCTORS AND DESTRUCTORS					*/
@@ -74,15 +74,28 @@ void	Bureaucrat::demote()
 	_grade++;
 }
 
-void	Bureaucrat::signForm(Form &form) const {
+void	Bureaucrat::signAForm(AForm &AForm) const {
 	try {
-		form.beSigned(*this);
-		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		AForm.beSigned(*this);
+		std::cout << this->getName() << " signed " << AForm.getName() << std::endl;
 	}
 	catch (const std::exception &e) {
-		std::cout << this->getName() << " can't sign form " << form.getName(); 
-		std::cout << " because it's beyond it's jurisdiction (rank difference = " << this->getGrade() - form.getSignGrade() << ")" << std::endl;
+		std::cout << this->getName() << " can't sign AForm " << AForm.getName(); 
+		std::cout << " because it's beyond it's jurisdiction (rank difference = " << this->getGrade() - AForm.getSignGrade() << ")" << std::endl;
 		//throw Bureaucrat::GradeTooLowException();
+	}
+}
+
+void	Bureaucrat::executeForm(AForm &form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;;
 	}
 }
 
@@ -102,7 +115,6 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &model)
 	_grade = model._grade;
 	return (*this);
 }
-
 
 /*--------------------------------------------------------------*/
 /*							EXCEPTIONS							*/
