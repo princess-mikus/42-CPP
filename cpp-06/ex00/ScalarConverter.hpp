@@ -8,9 +8,7 @@ class ScalarConverter
 		ScalarConverter(const ScalarConverter &model);
 		ScalarConverter	&operator=(const ScalarConverter &model);
 		~ScalarConverter();
-		template <typename T> static void numberConvert(const T &scalar);
-		static	double 	parseLiteral(std::string &literal);
-		static void		detectType(std::string &literal);
+		template <typename T> static void numberConvert(const T &scalar, bool nan);
 	public:
 		static void	convert(std::string &literal);
 };
