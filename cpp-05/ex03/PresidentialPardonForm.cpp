@@ -4,16 +4,16 @@
 /*				CONSTRUCTORS AND DESTRUCTORS					*/
 /*--------------------------------------------------------------*/
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm(): Form("PresidentialPardonForm", 25, 5) {
 	_target = "the soil";
 
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm(std::string target): Form("PresidentialPardonForm", 25, 5) {
 	_target = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &model): AForm("PresidentialPardonForm", 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &model): Form("PresidentialPardonForm", 25, 5) {
 	_target = model._target;
 }
 

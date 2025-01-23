@@ -49,7 +49,7 @@ void	ShrubberyCreationForm::beExecuted() const {
 	outfile << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o    " << std::endl;
 	outfile << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'   " << std::endl;
 	outfile << "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'   " << std::endl;
-	outfile << "    %&&%/ %&%%&&@@\\ V /@@' `88\v\8 `/88'   " << std::endl;
+	outfile << "    %&&%/ %&%%&&@@\\ V /@@' `88\v\\8 `/88'   " << std::endl;
 	outfile << "   `&%\\ ` /%&'    |.|        \\ '|8'      " << std::endl;
 	outfile << "       |o|        | |         | |        " << std::endl;
 	outfile << "       |.|        | |         | |        " << std::endl;

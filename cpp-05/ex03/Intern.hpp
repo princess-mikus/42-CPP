@@ -1,5 +1,5 @@
 #include <iostream>
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"

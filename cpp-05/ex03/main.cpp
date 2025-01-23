@@ -11,30 +11,15 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "Form.hpp"
+#include "Intern.hpp"
 
 int main()
 {
-	/* I'll make the main latter */
+	Form	*newForm;
+	Intern	intern;
+
+	newForm = intern.makeForm("robotomy request", "Bender");
+	delete newForm;
+	newForm = intern.makeForm("road fix request", "road");
 };
-
-/*
-int main(void)
-{
-	Bureaucrat	pedro;
-	pedro = Bureaucrat("Pedro", 12);
-	AForm a34 = AForm("a34", 2, 60);
-	try
-	{
-		pedro.signAForm(a34);
-		std::cout << a34 << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	return (0);
-}
-*/

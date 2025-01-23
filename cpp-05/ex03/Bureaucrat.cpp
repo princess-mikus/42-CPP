@@ -12,7 +12,7 @@
 
 #include "Bureaucrat.hpp"
 
-class AForm;
+class Form;
 
 /*--------------------------------------------------------------*/
 /*				CONSTRUCTORS AND DESTRUCTORS					*/
@@ -74,19 +74,19 @@ void	Bureaucrat::demote()
 	_grade++;
 }
 
-void	Bureaucrat::signAForm(AForm &AForm) const {
+void	Bureaucrat::signForm(Form &Form) const {
 	try {
-		AForm.beSigned(*this);
-		std::cout << this->getName() << " signed " << AForm.getName() << std::endl;
+		Form.beSigned(*this);
+		std::cout << this->getName() << " signed " << Form.getName() << std::endl;
 	}
 	catch (const std::exception &e) {
-		std::cout << this->getName() << " can't sign AForm " << AForm.getName(); 
-		std::cout << " because it's beyond it's jurisdiction (rank difference = " << this->getGrade() - AForm.getSignGrade() << ")" << std::endl;
+		std::cout << this->getName() << " can't sign Form " << Form.getName(); 
+		std::cout << " because it's beyond it's jurisdiction (rank difference = " << this->getGrade() - Form.getSignGrade() << ")" << std::endl;
 		//throw Bureaucrat::GradeTooLowException();
 	}
 }
 
-void	Bureaucrat::executeForm(AForm &form)
+void	Bureaucrat::executeForm(Form &form)
 {
 	try
 	{

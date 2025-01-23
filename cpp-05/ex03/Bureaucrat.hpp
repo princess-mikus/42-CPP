@@ -16,9 +16,9 @@
 #include <exception>
 #include <string>
 #include <iostream>
-#include "AForm.hpp"
+#include "Form.hpp"
 
-class AForm;
+class Form;
 
 class Bureaucrat
 {
@@ -39,8 +39,8 @@ class Bureaucrat
 		void		demote();
 		void		promote();
 
-		void		signAForm(AForm &AForm) const;
-		void		executeForm(AForm &form);
+		void		signForm(Form &Form) const;
+		void		executeForm(Form &form);
 
 		class GradeTooLowException: public std::exception
 		{

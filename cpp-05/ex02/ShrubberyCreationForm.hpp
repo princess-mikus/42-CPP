@@ -1,4 +1,7 @@
 #include "AForm.hpp"
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
 
 class ShrubberyCreationForm: public AForm
 {

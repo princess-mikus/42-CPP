@@ -37,14 +37,17 @@ std::string	RobotomyRequestForm::getTarget() const {
 void	RobotomyRequestForm::beExecuted() const {
 	
 	for (size_t i = 0; i < 3; i++)
-		std::cout << "drilling" << std::endl; sleep(1);
+	{
+		std::cout << "drilling" << std::endl;
+		sleep(1);
+	}
 	srand(time(NULL));
 	int random = rand();
 
 	if (random % 2)
 		std::cout << _target << " has been robotomized" << std::endl;
 	else
-		std::cout << _target << " the robotomy failed" << std::endl;
+		std::cout << _target << " the robotomy has failed" << std::endl;
 }
 
 /*--------------------------------------------------------------*/

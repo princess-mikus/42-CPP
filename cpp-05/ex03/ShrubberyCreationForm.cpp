@@ -4,16 +4,16 @@
 /*				CONSTRUCTORS AND DESTRUCTORS					*/
 /*--------------------------------------------------------------*/
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm(): Form("ShrubberyCreationForm", 145, 137) {
 	_target = "tree";
 
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): Form("ShrubberyCreationForm", 145, 137) {
 	_target = target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &model): AForm("ShrubberyCreationForm", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &model): Form("ShrubberyCreationForm", 145, 137) {
 	_target = model._target;
 }
 
@@ -49,7 +49,7 @@ void	ShrubberyCreationForm::beExecuted() const {
 	outfile << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o    " << std::endl;
 	outfile << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'   " << std::endl;
 	outfile << "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'   " << std::endl;
-	outfile << "    %&&%/ %&%%&&@@\\ V /@@' `88\v\8 `/88'   " << std::endl;
+	outfile << "    %&&%/ %&%%&&@@\\ V /@@' `88\v\\8 `/88'   " << std::endl;
 	outfile << "   `&%\\ ` /%&'    |.|        \\ '|8'      " << std::endl;
 	outfile << "       |o|        | |         | |        " << std::endl;
 	outfile << "       |.|        | |         | |        " << std::endl;
