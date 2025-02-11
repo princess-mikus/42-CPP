@@ -1,16 +1,16 @@
-#include <Ice.hpp>
+#include "Ice.hpp"
 
-Ice::Ice() {
+Ice::Ice(): AMateria() {
 	_type = "ice";
 	std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(std::string const &type) {
+Ice::Ice(std::string const &type): AMateria(type) {
 	_type = type; 
 	std::cout << "Ice name constructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &to_copy) {
+Ice::Ice(const Ice &to_copy): AMateria(to_copy) {
 	std::cout << "Ice copy constructor called" << std::endl;
 	if (this == &to_copy)
 		return ;
@@ -34,3 +34,6 @@ Ice	*Ice::clone() const {
 	return (new Ice(*this));
 }
 
+void	Ice::use(ICharacter &target) {
+	std::cout << "* shoots a bolt of ice at " << target.getName() << " *" << std::endl;
+}
