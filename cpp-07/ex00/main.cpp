@@ -1,4 +1,4 @@
-#include "Whatever.hpp"
+#include "whatever.hpp"
 
 int	main(void) {
 	int	i_first = 70;

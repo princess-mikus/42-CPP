@@ -14,6 +14,7 @@ ScalarConverter::~ScalarConverter() {
 }
 
 void	ScalarConverter::convert(std::string &literal) {
+	std::cout << atoi("2167483647") << std::endl;
 	if (literal == "nan")
 		numberConvert(std::numeric_limits<double>::quiet_NaN(), true);
 	else if (literal == "inf" || literal == "+inf")
