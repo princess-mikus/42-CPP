@@ -34,31 +34,19 @@ Array<T>	&Array<T>::operator=(const Array<T> &model) {
 	return *this;
 }
 
-
-template <>
-Array<char>	&Array<char>::operator=(const Array<int> &model) {
+template <typename T, class = typename std::enable_if<std::is_same<T, int>::value>::type>>
+Array<T>	&operator=(const Array<int> &model) {
 	data = new char[model.size()];
 	_size = model.size();
 	for (unsigned int i = 0; i < _size; i++)
-		data[i] = static_cast<char>(model.data[i]);
+		data[i] = static_cast<char>(model.getData(i));
 	return *this;
 }
-
-template <typename T>
-Array<T>	&Array<T>::operator=(const Array<char> &model) {
-	data = new T[model._size];
-	_size = model._size;
-	for (unsigned int i = 0; i < _size; i++)
-		data[i] = static_cast<int>(model.data[i]);
-	return *this;
-}
-
 
 template <typename T>
 Array<T>::~Array() {
 	delete[] data;
 }
-
 
 template <typename T>
 T	&Array<T>::operator[](unsigned int n) {
@@ -71,6 +59,11 @@ T	&Array<T>::operator[](unsigned int n) {
 template <typename T>
 unsigned int	Array<T>::size() const {
 	return (_size);
+}
+
+template <typename T>
+T	Array<T>::getData(unsigned int idx) const {
+	return(data[idx]);
 }
 
 #endif
