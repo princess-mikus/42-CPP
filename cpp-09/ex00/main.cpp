@@ -2,6 +2,12 @@
 
 int	main(void)
 {
-	BitcoinExchange("data.csv");
+	BitcoinExchange database("data.csv");
+
+	for (std::string entry; std::getline(database, entry))
+	{
+		
+	}
 	
-}	
+	database.exchange(date, amount);
+}

@@ -20,7 +20,7 @@ BitcoinExchange::BitcoinExchange(std::string filename) {
 		unsigned int month = atoi(date_str.substr(f_del, s_del).c_str() + 1);
 		unsigned int day = atoi(date_str.substr(s_del, date_str.npos).c_str() + 1);
 		Date	date(year, month, day);
-		double value = atof(entry.substr(date_str.size(), entry.size()).c_str());
+		double value = atof(entry.substr(date_str.size() + 1, entry.size()).c_str());
 		_data.insert(std::make_pair(date, value));
 	}
 }
@@ -45,11 +45,12 @@ BitcoinExchange::Date::Date(unsigned int year, unsigned int month, unsigned int 
 	_day = day;
 }
 
-BitcoinExchange::Date::Date(BitcoinExchange::Date &model) {
+BitcoinExchange::Date::Date(const BitcoinExchange::Date &model) {
 	_year = model._year;
 	_month = model._month;
 	_day = model._day;
 }
+
 
 BitcoinExchange::Date	&BitcoinExchange::Date::operator=(const BitcoinExchange::Date &model) {
 	_year = model._year;
@@ -59,6 +60,7 @@ BitcoinExchange::Date	&BitcoinExchange::Date::operator=(const BitcoinExchange::D
 }
 
 BitcoinExchange::Date::~Date() {
+
 }
 
 bool	BitcoinExchange::Date::operator>(const Date &to_compare) const {
@@ -125,4 +127,14 @@ bool	BitcoinExchange::Date::operator==(const Date &to_compare) const {
 bool	BitcoinExchange::Date::operator!=(const Date &to_compare) const {
 	return (!(_year == to_compare._year && _month == to_compare._month && 
 			_day == to_compare._day));
+}
+
+double	BitcoinExchange::getValue(const BitcoinExchange::Date &date) {
+	if (_data.find(date) != _data.end())
+		return (_data.find(date)->second);
+	return ((--_data.upper_bound(date))->second);
+}
+
+void	BitcoinExchange::exchange(const BitcoinExchange::Date &date, double amount) {
+	std::cout << getValue(date) * amount << std::endl;
 }

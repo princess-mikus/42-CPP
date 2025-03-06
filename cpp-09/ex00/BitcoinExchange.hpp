@@ -17,7 +17,7 @@ class BitcoinExchange
 			public:
 				Date();
 				Date(unsigned int year, unsigned int month, unsigned int day);
-				Date(Date &model);
+				Date(const Date &model);
 				Date	&operator=(const Date &model);
 				~Date();
 
@@ -31,6 +31,9 @@ class BitcoinExchange
 		BitcoinExchange();
 		BitcoinExchange(std::string filename);
 		~BitcoinExchange();
+
+		double	getValue(const Date &date);
+		void	exchange(const Date &date, double amount);
 	private:
 		std::map<Date, double> _data;
 };
