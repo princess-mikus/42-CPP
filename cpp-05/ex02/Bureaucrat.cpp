@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:09:45 by fcasaubo          #+#    #+#             */
-/*   Updated: 2025/01/09 16:44:03 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:46:20 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	Bureaucrat::demote()
 	_grade++;
 }
 
-void	Bureaucrat::signAForm(AForm &AForm) const {
+void	Bureaucrat::signForm(AForm &AForm) const {
 	try {
 		AForm.beSigned(*this);
 		std::cout << this->getName() << " signed " << AForm.getName() << std::endl;

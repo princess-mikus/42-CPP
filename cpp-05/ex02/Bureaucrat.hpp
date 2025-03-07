@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:10:02 by fcasaubo          #+#    #+#             */
-/*   Updated: 2025/01/09 15:55:56 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:46:36 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class Bureaucrat
 		void		demote();
 		void		promote();
 
-		void		signAForm(AForm &AForm) const;
+		void		signForm(AForm &AForm) const;
 		void		executeForm(AForm &form);
 
 		class GradeTooLowException: public std::exception
