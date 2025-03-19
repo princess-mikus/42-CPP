@@ -3,11 +3,15 @@
 int	main(void)
 {
 	BitcoinExchange database("data.csv");
+	BitcoinExchange::Date	date();
 
-	for (std::string entry; std::getline(database, entry))
+	date.getDate();
+
+	/*for (std::string entry; std::getline(database, entry))
 	{
 		
 	}
 	
 	database.exchange(date, amount);
+*/
 }

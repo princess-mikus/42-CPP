@@ -1,5 +1,4 @@
 #include "ScalarConverter.hpp"
-#include <typeinfo>
 
 ScalarConverter::ScalarConverter() {
 
@@ -9,28 +8,74 @@ ScalarConverter::ScalarConverter(const ScalarConverter &model) {
 	(void)model;
 }
 
+ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &model) {
+	(void)model;
+	return *this;
+}
+
 ScalarConverter::~ScalarConverter() {
 
 }
 
+/*
+
+static void	writeScalar(const int &scalar) {
+	(void)scalar;
+}
+
+static void	writeScalar(const char &scalar) {
+	(void)scalar;
+}
+
+static void	writeScalar(const float &scalar) {
+	(void)scalar;
+}
+
+*/
+
+static void	writeScalar(const double &scalar) {
+	/* CASES FOR CHAR */
+	if (scalar != scalar || scalar < 0 || scalar > 128)
+		std::cout << "char: " << "impossible" << std::endl;
+	else if (scalar < 32)
+		std::cout << "char: " << "Non printable character" << std::endl;
+	else
+		std::cout << "char: " << static_cast<char>(scalar) << std::endl;
+
+	/* CASES FOR INT */
+	if (scalar != scalar || scalar > std::numeric_limits<int>::max() || scalar < std::numeric_limits<int>::min())
+		std::cout << "int: " << "impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(scalar) << std::endl;
+
+	/* CASES FOR FLOAT */
+	if (scalar > std::numeric_limits<float>::max() || scalar < std::numeric_limits<float>::min())
+		std::cout << "float: " <<  "impossible" << std::endl;
+	else
+		std::cout << "float: " <<  static_cast<float>(scalar) << "f" << std::endl;
+}
+
 void	ScalarConverter::convert(std::string &literal) {
-	std::cout << atoi("2167483647") << std::endl;
 	if (literal == "nan")
-		numberConvert(std::numeric_limits<double>::quiet_NaN(), true);
+		writeScalar(std::numeric_limits<double>::quiet_NaN());
 	else if (literal == "inf" || literal == "+inf")
-		numberConvert(std::numeric_limits<double>::infinity(), false);
+		writeScalar(std::numeric_limits<double>::infinity());
 	else if (literal == "-inf")
-		numberConvert(std::numeric_limits<double>::infinity() * -1, false);
+		writeScalar(std::numeric_limits<double>::infinity() * -1);
+	else if ()
+	else if (literal.find(".") == literal.npos)
+		writeScalar(atoi(literal.c_str()));
+	else
+		writeScalar(atof(literal.c_str()));
+	/*
 	else if (literal.length() == 1 && !isdigit(literal[0]))
 		numberConvert(literal[0], false);
 	else if (literal.find('.'))
-		numberConvert(atof(literal.c_str()), false);
-	else
-		numberConvert(atoi(literal.c_str()), false);
+		fromFloat(atof(literal.c_str()), false);
+	*/
 }
-
-template <typename T>
-void	ScalarConverter::numberConvert(const T &scalar, bool nan) {
+/*
+void	ScalarConverter::numberConvert(const int &scalar, bool nan) {
 	if (nan || scalar < 0 || scalar > 128)
 		std::cout << "char: " << "impossible" << std::endl;
 	else if (scalar < 32)
@@ -50,3 +95,4 @@ void	ScalarConverter::numberConvert(const T &scalar, bool nan) {
 	else
 		std::cout << "double: " <<  static_cast<double>(scalar) << std::endl;
 }
+*/

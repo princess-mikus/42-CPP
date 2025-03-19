@@ -15,8 +15,7 @@ class BitcoinExchange
 				unsigned int _month;
 				unsigned int _day;
 			public:
-				Date();
-				Date(unsigned int year, unsigned int month, unsigned int day);
+				Date(unsigned int year = 1970, unsigned int month = 1, unsigned int day = 1);
 				Date(const Date &model);
 				Date	&operator=(const Date &model);
 				~Date();

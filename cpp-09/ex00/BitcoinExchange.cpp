@@ -29,10 +29,6 @@ BitcoinExchange::~BitcoinExchange() {
 
 }
 
-BitcoinExchange::Date::Date() {
-
-}
-
 BitcoinExchange::Date::Date(unsigned int year, unsigned int month, unsigned int day) {
 	_year = year;
 	if (!month || month > 12)
