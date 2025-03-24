@@ -1,5 +1,8 @@
 #include <iostream>
 #include <limits>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
 
 class ScalarConverter
 {
@@ -9,5 +12,5 @@ class ScalarConverter
 		ScalarConverter	&operator=(const ScalarConverter &model);
 		~ScalarConverter();
 	public:
-		static void	convert(std::string &literal);
+		static void	convert(const std::string &literal);
 };
