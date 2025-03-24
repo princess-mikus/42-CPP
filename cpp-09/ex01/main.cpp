@@ -5,11 +5,5 @@ int	main(int argc, char *argv[]) {
 		std::cerr << "Not enough arguments!" << std::endl;
 		return (2);
 	}
-
-	try {
-		std::cout << RPN::calculate(std::string(argv[1])) << std::endl;	
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
+	std::cout << RPN::calculate(std::string(argv[1])) << std::endl;	
 }

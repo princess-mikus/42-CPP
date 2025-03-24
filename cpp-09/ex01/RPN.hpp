@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <stdexcept>
+#include <limits>
 
 class RPN
 {
@@ -8,6 +9,5 @@ class RPN
 		RPN();
 		~RPN();
 	public:
-		static	double calculate(std::string arg);
-		static	bool istoken(char c);
+		static	double calculate(const std::string &arg);
 };
