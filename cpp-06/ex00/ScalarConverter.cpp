@@ -1,5 +1,6 @@
 #include "ScalarConverter.hpp"
 
+static bool wrong = false;
 
 ScalarConverter::ScalarConverter() {
 }
@@ -15,6 +16,15 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &model) {
 
 ScalarConverter::~ScalarConverter() {
 
+}
+
+static bool isScalar(const std::string &literal) {
+	for (size_t i = 0; literal[i]; i++)
+	{
+		if ((!isdigit(literal[i]) || (literal[i] == 'f' && i != literal.size())) && literal[i] != '.' && literal[i] != '-' && literal[i] != '+')
+			return (false);
+	}
+	return (true);
 }
 
 template <typename T>
@@ -34,9 +44,9 @@ static void	writeScalar(const T &scalar) {
 		std::cout << "int: " << static_cast<int>(scalar) << std::endl;
 
 	/* FLOAT CASE */
-	if (wrong /*||
+	if (wrong ||
 		(scalar > std::numeric_limits<float>::max() && scalar != std::numeric_limits<float>::infinity()) ||
-		(scalar < -std::numeric_limits<float>::max() && scalar != -std::numeric_limits<float>::infinity())*/)
+		(scalar < -std::numeric_limits<float>::max() && scalar != -std::numeric_limits<float>::infinity()))
 		std::cout << "float: " << "impossible" << std::endl;
 	else if (static_cast<float>(scalar) == static_cast<int>(scalar))
 		std::cout << "float: " <<  static_cast<float>(scalar) << ".0f" << std::endl;
@@ -54,17 +64,17 @@ static void	writeScalar(const T &scalar) {
 
 
 void	ScalarConverter::convert(const std::string &literal) {
-/*	if ((literal.length() > 1 && !isScalar(literal)))
-	{
-		wrong = true;
-		writeScalar(0);
-	}
-	else*/ if (literal == "nan")
+	if (literal == "nan" || literal == "nanf")
 		writeScalar(std::numeric_limits<double>::quiet_NaN());
 	else if (literal == "inf" || literal == "+inf")
 		writeScalar(std::numeric_limits<double>::infinity());
 	else if (literal == "-inf")
 		writeScalar(-std::numeric_limits<double>::infinity());
+	else if ((literal.length() > 1 && !isScalar(literal)))
+	{
+		wrong = true;
+		writeScalar(0);
+	}
 	else if (literal.length() == 1 && !isdigit(literal[0]))
 		writeScalar(literal[0]);
 	else if (literal.find('.'))

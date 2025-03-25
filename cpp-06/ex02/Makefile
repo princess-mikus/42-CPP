@@ -1,6 +1,6 @@
-NAME = convert
+NAME = identifier
 
-SRC = main.cpp ScalarConverter.cpp
+SRC = main.cpp Base.cpp Functions.cpp
 OBJ = $(SRC:%.cpp=%.o)
 CC = c++
 RM = rm -f

@@ -3,8 +3,8 @@
 #include "B.hpp"
 #include "C.hpp"
 #include <unistd.h>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 Base	*generate(void);
