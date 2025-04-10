@@ -1,5 +1,11 @@
 #include "PmergeMe.hpp"
-#include <stdlib.h>
+#include <cstdlib>
+#include <cmath>
+
+int nextJacobsthal(int n_jacobsthal)
+{
+    return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
+}
 
 void print_list(std::list<std::list<int> > lst) {
 	const char *colors[] {
@@ -40,14 +46,19 @@ void init_list(char *argv[], std::list<std::list<int> > &sequence) {
 	print_list(sequence);
 }
 
+
 void	mergeInsert(std::list<std::list<int> > &lst) {
 	std::list<std::list<int> > newList;
 	std::list<int> rest;
 
+	/* IF LIST IS NOT EVEN */
+	
 	if (lst.size() % 2) {
 		rest = lst.back();
 		lst.pop_back();
 	}
+	
+	/* MERGE */
 
 	for (std::list<std::list<int> >::iterator it = lst.begin(); it != lst.end(); it++)
 	{
@@ -66,8 +77,15 @@ void	mergeInsert(std::list<std::list<int> > &lst) {
 	}
 	print_list(newList);
 	
+	/* CHECK RECURSIVE CALL */
+
 	if (lst.size() > 1)
 		mergeInsert(newList);
+
+	/* INSERT */
+
+	std::list<std::list<int> > pend;
+	std::list<std::list<int> > main;
 }
 
 int	main(int argc, char *argv[]) {
