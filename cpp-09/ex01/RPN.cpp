@@ -34,7 +34,7 @@ double RPN::calculate(const std::string &arg) {
 					stack.top() = stack.top() * second;
 					break;
 				case '/':
-					if (second) {
+					if (!second) {
 						std::cerr << "Division by zero" << std::endl;
 						return(std::numeric_limits<double>::quiet_NaN());
 					}
@@ -45,8 +45,7 @@ double RPN::calculate(const std::string &arg) {
 			}
 		}
 		else {
-			std::cerr << "Not a number nor operation" << std::endl;
-			return(std::numeric_limits<double>::quiet_NaN());
+			throw(std::runtime_error("Not a number nor operation"));
 		}
 	}
 	if (stack.size() > 1) {
