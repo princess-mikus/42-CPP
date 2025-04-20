@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
-#include <cstdlib>
-#include <cmath>
+
 
 int nextJacobsthal(int n_jacobsthal)
 {
@@ -11,9 +10,9 @@ void print_list(std::list<std::list<int> > lst) {
 	const char *colors[] {
 		RED,
 		GREEN,
-		YELLOW,
 		BLUE,
 		MAGENTA,
+		YELLOW,
 		CYAN,
 		WHITE
 	};
@@ -27,7 +26,7 @@ void print_list(std::list<std::list<int> > lst) {
 			std::cout << colors[i] << *it2 << " ";
 		i++;
 	}
-	std::cout << std::endl;
+	std::cout << RESET << std::endl;
 }
 
 void init_list(char *argv[], std::list<std::list<int> > &sequence) {
@@ -47,7 +46,7 @@ void init_list(char *argv[], std::list<std::list<int> > &sequence) {
 }
 
 
-void	mergeInsert(std::list<std::list<int> > &lst) {
+std::list<std::list<int> >	mergeInsert(std::list<std::list<int> > lst) {
 	std::list<std::list<int> > newList;
 	std::list<int> rest;
 
@@ -75,17 +74,73 @@ void	mergeInsert(std::list<std::list<int> > &lst) {
 		}
 		newList.push_back(temp);
 	}
-	print_list(newList);
+	//print_list(newList);
 	
 	/* CHECK RECURSIVE CALL */
 
-	if (lst.size() > 1)
-		mergeInsert(newList);
+	print_list(newList);
+
+	if (newList.size() > 1)
+		newList = mergeInsert(newList);
+
+	/* DIVIDE IN HALF */
+	
+	std::list<std::list<int> > newList2;
+
+	for (std::list<std::list<int> >::iterator it = newList.begin(); it != newList.end(); it++)
+	{
+		std::list<int> temp;
+		std::list<int>::iterator it2 = it->begin();
+
+		std::advance(it2, it->size() / 2);
+		temp.splice(temp.end(), *it, it2, it->end());
+		newList2.push_back(*it);
+		newList2.push_back(temp);
+	}
+
+
+	if (newList2.size() <= 2)
+		return (newList2);
 
 	/* INSERT */
 
 	std::list<std::list<int> > pend;
 	std::list<std::list<int> > main;
+
+	for (std::list<std::list<int> >::iterator it = newList2.begin(); it != newList2.end(); it++)
+	{
+		if (it != newList2.begin() && std::distance(newList2.begin(), it) % 2) {
+			pend.push_back(*it);
+		}
+		else {
+			main.push_back(*it);
+		}
+	}
+
+	
+	if (rest.size())
+		pend.push_back(rest);
+
+	std::cout << "Pend == ";
+	print_list(pend);
+	std::cout << "Main == ";
+	print_list(main);
+	std::cout << std::endl;
+
+	int jPos = 3 - 1;
+	int jPrevPos = 1; 
+
+	for (size_t i = 3; pend.size();)
+	{
+		std::list<std::list<int> >::iterator itPend = pend.begin();
+		std::advance(itPend, jPos - jPrevPos);
+	}
+	
+	std::cout << "Main == ";
+	print_list(main);
+	std::cout << std::endl;
+
+	return (main);
 }
 
 int	main(int argc, char *argv[]) {
