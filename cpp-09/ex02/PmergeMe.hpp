@@ -3,6 +3,7 @@
 #include <utility>
 #include <cstdlib>
 #include <cmath>
+#include <algorithm>
 
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
@@ -22,11 +23,9 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
-class PmergeMe
+int comparisons = 0;
+
+namespace PmergeMe
 {
-	private:
-		
-	public:
-		PmergeMe(/* args */);
-		~PmergeMe();
-};
+	std::list<std::list<int> >	mergeInsert(std::list<std::list<int> > lst);
+}

@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 
-
 int nextJacobsthal(int n_jacobsthal)
 {
     return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
@@ -45,102 +44,37 @@ void init_list(char *argv[], std::list<std::list<int> > &sequence) {
 	print_list(sequence);
 }
 
+bool _comp(const int first, const std::list<int> second)
+{
+	comparisons++;
+	return(first < second.back());
+}
 
-std::list<std::list<int> >	mergeInsert(std::list<std::list<int> > lst) {
-	std::list<std::list<int> > newList;
-	std::list<int> rest;
+int maxComp(int n)
+{
+    int sum = 0;
+    for (int k = 1; k <= n; ++k) {
+        double value = (3.0 / 4.0) * k;
+        sum += static_cast<int>(ceil(log2(value)));
+    }
+    return sum;
+}
 
-	/* IF LIST IS NOT EVEN */
-	
-	if (lst.size() % 2) {
-		rest = lst.back();
-		lst.pop_back();
-	}
-	
-	/* MERGE */
-
-	for (std::list<std::list<int> >::iterator it = lst.begin(); it != lst.end(); it++)
+void isSorted(std::list<std::list<int> > sequence, unsigned int argc) {
+	if (argc - 1 != sequence.size())
 	{
-		std::list<std::list<int> >::iterator first = it++;
-		std::list<std::list<int> >::iterator second = it;
-		std::list<int> temp;
-		if (first->back() < second->back()) {
-			temp = *first;
-			temp.splice(temp.end(), *second, second->begin(), second->end());
-		}
-		else {
-			temp = *second;
-			temp.splice(temp.end(), *first, first->begin(), first->end());
-		}
-		newList.push_back(temp);
+		std::cout << "You lost numbers along the way!" << std::endl;
+		return;
 	}
-	//print_list(newList);
-	
-	/* CHECK RECURSIVE CALL */
-
-	print_list(newList);
-
-	if (newList.size() > 1)
-		newList = mergeInsert(newList);
-
-	/* DIVIDE IN HALF */
-	
-	std::list<std::list<int> > newList2;
-
-	for (std::list<std::list<int> >::iterator it = newList.begin(); it != newList.end(); it++)
+		for (std::list<std::list<int> >::iterator it = sequence.begin(); it != --sequence.end();)
 	{
-		std::list<int> temp;
-		std::list<int>::iterator it2 = it->begin();
-
-		std::advance(it2, it->size() / 2);
-		temp.splice(temp.end(), *it, it2, it->end());
-		newList2.push_back(*it);
-		newList2.push_back(temp);
-	}
-
-
-	if (newList2.size() <= 2)
-		return (newList2);
-
-	/* INSERT */
-
-	std::list<std::list<int> > pend;
-	std::list<std::list<int> > main;
-
-	for (std::list<std::list<int> >::iterator it = newList2.begin(); it != newList2.end(); it++)
-	{
-		if (it != newList2.begin() && std::distance(newList2.begin(), it) % 2) {
-			pend.push_back(*it);
-		}
-		else {
-			main.push_back(*it);
+		std::list<std::list<int> >::iterator previous = it++;
+		if (previous->back() > it->back()) {
+			std::cout << previous->back() << " " << it->back() << " Not sorted!" << std::endl;
 		}
 	}
-
+	std::cout << "Sorted!" << std::endl;
 	
-	if (rest.size())
-		pend.push_back(rest);
-
-	std::cout << "Pend == ";
-	print_list(pend);
-	std::cout << "Main == ";
-	print_list(main);
-	std::cout << std::endl;
-
-	int jPos = 3 - 1;
-	int jPrevPos = 1; 
-
-	for (size_t i = 3; pend.size();)
-	{
-		std::list<std::list<int> >::iterator itPend = pend.begin();
-		std::advance(itPend, jPos - jPrevPos);
-	}
-	
-	std::cout << "Main == ";
-	print_list(main);
-	std::cout << std::endl;
-
-	return (main);
 }
 
 int	main(int argc, char *argv[]) {
@@ -148,5 +82,8 @@ int	main(int argc, char *argv[]) {
 		return (0);
 	std::list<std::list<int> > sequence;
 	init_list(argv, sequence);
-	mergeInsert(sequence);
+	sequence = mergeInsert(sequence);
+	isSorted(sequence, argc);
+	print_list(sequence);
+	std::cout << "Comparisons: " << comparisons << " vs " << maxComp(sequence.size()) << std::endl;
 }
