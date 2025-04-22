@@ -1,22 +1,40 @@
 #include "PmergeMe.hpp"
 
-std::list<std::list<int> >	PmergeMe::mergeInsert(std::list<std::list<int> > lst) {
-	std::list<std::list<int> > newList;
-	std::list<int> rest;
+int comparisons = 0;
 
-	/* IF LIST IS NOT EVEN */
-	
-	if (lst.size() % 2) {
-		rest = lst.back();
-		lst.pop_back();
-	}
-	
-	/* MERGE */
+static int nextJacobsthal(int n_jacobsthal)
+{
+	return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
+}
 
-	for (std::list<std::list<int> >::iterator it = lst.begin(); it != lst.end(); it++)
+static bool _comp(const int first, const std::list<int> second)
+{
+	comparisons++;
+	return(first < second.back());
+}
+
+void	listPmergeMe::init_list(char *argv[], listlist &sequence) {
+	std::list<int>	start;
+
+	for (size_t i = 1; argv[i]; i++)
+		start.push_back(atoi(argv[i]));
+	
+	for (std::list<int>::iterator it = start.begin(); it != start.end(); it++)
 	{
-		std::list<std::list<int> >::iterator first = it++;
-		std::list<std::list<int> >::iterator second = it;
+		std::list<int> temp;
+
+		temp.push_back(*it);
+		sequence.push_back(temp);
+	}
+}
+
+listlist	listPmergeMe::merge(listlist lst) {
+	listlist newLst;
+
+	for (listlist::iterator it = lst.begin(); it != lst.end(); it++)
+	{
+		listlist::iterator first = it++;
+		listlist::iterator second = it;
 		std::list<int> temp;
 		comparisons++;
 		if (first->back() < second->back()) {
@@ -27,47 +45,33 @@ std::list<std::list<int> >	PmergeMe::mergeInsert(std::list<std::list<int> > lst)
 			temp = *second;
 			temp.splice(temp.end(), *first, first->begin(), first->end());
 		}
-		newList.push_back(temp);
+		newLst.push_back(temp);
 	}
 
-	if (!rest.empty())
-		std::cout << "I have rest " << rest.front() << " " << rest.back() << std::endl;
-	
-	std::cout << "AFTER MERGE == ";
-	
-	/* CHECK RECURSIVE CALL */
-	
-	if (newList.size() > 1)
-	newList = mergeInsert(newList);
+	return (newLst);
+}
 
-	/* DIVIDE IN HALF */
-	
-	std::list<std::list<int> > newList2;
+listlist	listPmergeMe::halve(listlist lst) {
+	listlist newLst;
 
-	for (std::list<std::list<int> >::iterator it = newList.begin(); it != newList.end(); it++)
+	for (listlist::iterator it = lst.begin(); it != lst.end(); it++)
 	{
 		std::list<int> temp;
 		std::list<int>::iterator it2 = it->begin();
 
 		std::advance(it2, it->size() / 2);
 		temp.splice(temp.end(), *it, it2, it->end());
-		newList2.push_back(*it);
-		newList2.push_back(temp);
+		newLst.push_back(*it);
+		newLst.push_back(temp);
 	}
+	return (newLst);
+}
 
-	if (newList2.size() < 2)
-		return (newList2);
-
-	/* INSERT */
-
-	std::list<std::list<int> > pend;
-	std::list<std::list<int> > main;
-	std::list<std::list<std::list <int> >::iterator > pairs;
-	
+void	listPmergeMe::constructMainPend(listlist lst, listlist &main, listlist &pend, iteratorlistlist &pairs, std::list<int> rest) {
 	size_t i = 0;
-	for (std::list<std::list<int> >::iterator it = newList2.begin(); it != newList2.end(); it++)
+	for (listlist::iterator it = lst.begin(); it != lst.end(); it++)
 	{
-		if (it != newList2.begin() && !(std::distance(newList2.begin(), it) % 2)) {
+		if (it != lst.begin() && !(std::distance(lst.begin(), it) % 2)) {
 			pend.push_back(*it);
 		}
 		else {
@@ -82,35 +86,65 @@ std::list<std::list<int> >	PmergeMe::mergeInsert(std::list<std::list<int> > lst)
 		pend.push_back(rest);
 		pairs.push_back(main.end());
 	}
+}
 
-	unsigned int jPos = 3 - 1;
-	unsigned int jPrevPos = 1; 
-	size_t jN = 3;
+listlist	listPmergeMe::insert(listlist &main, listlist pend, iteratorlistlist pairs) {
+	unsigned int jacobsthalPos = 3 - 1;
+	unsigned int jacobsthalPrevPos = 1; 
+	size_t jacobsthalN = 3;
 
-	std::list<std::list<std::list <int> >::iterator >::iterator pairIt = pairs.begin();
-	for (std::list<std::list<int> >::iterator pendIt = pend.begin(); !pend.empty();)
+	iteratorlistlist::iterator pairIt = pairs.begin();
+	for (listlist::iterator pendIt = pend.begin(); !pend.empty();)
 	{
-		if (jPos - jPrevPos > pend.size())
+		if (jacobsthalPos - jacobsthalPrevPos > pend.size())
 		{
 			std::advance(pendIt, pend.size());
 			std::advance(pairIt, pend.size());
 		}
 		else
 		{
-			std::advance(pendIt, jPos - jPrevPos);
-			std::advance(pairIt, jPos - jPrevPos);
+			std::advance(pendIt, jacobsthalPos - jacobsthalPrevPos);
+			std::advance(pairIt, jacobsthalPos - jacobsthalPrevPos);
 		}
 		for (; pendIt != --pend.begin();)
 		{
-			std::list<std::list<int> >::iterator temp = std::upper_bound(main.begin(), *pairIt, pendIt->back(), _comp);
-			main.insert(temp, *pendIt);
-			temp = pendIt--;
-			pend.erase(temp);
-			std::list<std::list<std::list <int> >::iterator >::iterator temp2 = pairIt--;
-			pairs.erase(temp2);
+			main.insert(std::upper_bound(main.begin(), *pairIt, pendIt->back(), _comp), *pendIt);
+			listlist::iterator tempPendIt = pendIt--;
+			pend.erase(tempPendIt);
+			iteratorlistlist::iterator tempPairIt = pairIt--;
+			pairs.erase(tempPairIt);
 		}
-		jPrevPos = jPos;
-		jPos = nextJacobsthal(++jN) - 1;
+		jacobsthalPrevPos = jacobsthalPos;
+		jacobsthalPos = nextJacobsthal(++jacobsthalN) - 1;
 	}
+
+	return (main);
+}
+
+listlist	listPmergeMe::mergeInsert(listlist lst) {
+	std::list<int> rest;
+
+	if (lst.size() % 2) {
+		rest = lst.back();
+		lst.pop_back();
+	}
+
+	lst = listPmergeMe::merge(lst);
+
+	if (lst.size() > 1)
+		lst = mergeInsert(lst);
+
+	lst = listPmergeMe::halve(lst);
+
+	if (lst.size() < 2)
+		return (lst);
+
+	listlist			main;
+	listlist			pend;
+	iteratorlistlist	pairs;
+	
+	listPmergeMe::constructMainPend(lst, main, pend, pairs, rest);
+	listPmergeMe::insert(main, pend, pairs);
+
 	return (main);
 }

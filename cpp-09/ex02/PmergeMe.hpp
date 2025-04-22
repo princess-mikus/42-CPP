@@ -1,3 +1,6 @@
+#ifndef PMERGE_HPP
+#define PMERGME_HPP
+
 #include <list>
 #include <iostream>
 #include <utility>
@@ -23,9 +26,29 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
-int comparisons = 0;
+typedef std::list<std::list<int> > listlist;
+typedef std::list<std::list<std::list <int> >::iterator > iteratorlistlist;
 
-namespace PmergeMe
+namespace listPmergeMe
 {
-	std::list<std::list<int> >	mergeInsert(std::list<std::list<int> > lst);
+	void 		init_list(char *argv[], listlist &sequence);
+	listlist	merge(listlist lst);
+	listlist	halve(listlist lst);
+	void		constructMainPend(listlist lst, listlist &main, listlist &pend, 
+									iteratorlistlist &pairs, std::list<int> rest);
+	listlist	insert(listlist &main, listlist pend, iteratorlistlist pairs);
+	listlist	mergeInsert(listlist lst);
 }
+
+namespace dequePmergeMe
+{
+	void 		init_list(char *argv[], listlist &sequence);
+	listlist	merge(listlist lst);
+	listlist	halve(listlist lst);
+	void		constructMainPend(listlist lst, listlist &main, listlist &pend, 
+									iteratorlistlist &pairs, std::list<int> rest);
+	listlist	insert(listlist &main, listlist pend, iteratorlistlist pairs);
+	listlist	mergeInsert(listlist lst);
+}
+
+#endif

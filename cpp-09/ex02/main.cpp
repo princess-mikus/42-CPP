@@ -1,23 +1,29 @@
 #include "PmergeMe.hpp"
 
-int nextJacobsthal(int n_jacobsthal)
-{
-    return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
-}
+extern int comparisons;
 
-void print_list(std::list<std::list<int> > lst) {
-	const char *colors[] {
-		RED,
-		GREEN,
-		BLUE,
-		MAGENTA,
-		YELLOW,
-		CYAN,
-		WHITE
-	};
+static void print_list(listlist lst) {
+	#if __cplusplus > 199711L
+		const char *colors[] {
+			RED,
+			GREEN,
+			BLUE,
+			MAGENTA,
+			YELLOW,
+			CYAN,
+		};
+	#else
+		const char *colors[6];
+		colors[0] = RED;
+		colors[1] = GREEN;
+		colors[2] = BLUE;
+		colors[3] = MAGENTA;
+		colors[4] = YELLOW;
+		colors[5] = CYAN;
+	#endif
 
 	size_t i = 0;
-	for (std::list<std::list<int> >::iterator it = lst.begin(); it != lst.end(); it++)
+	for (listlist::iterator it = lst.begin(); it != lst.end(); it++)
 	{
 		if (i == 6)
 			i = 0;
@@ -28,29 +34,8 @@ void print_list(std::list<std::list<int> > lst) {
 	std::cout << RESET << std::endl;
 }
 
-void init_list(char *argv[], std::list<std::list<int> > &sequence) {
-	std::list<int>	start;
 
-	for (size_t i = 1; argv[i]; i++)
-		start.push_back(atoi(argv[i]));
-	
-	for (std::list<int>::iterator it = start.begin(); it != start.end(); it++)
-	{
-		std::list<int> temp;
-
-		temp.push_back(*it);
-		sequence.push_back(temp);
-	}
-	print_list(sequence);
-}
-
-bool _comp(const int first, const std::list<int> second)
-{
-	comparisons++;
-	return(first < second.back());
-}
-
-int maxComp(int n)
+static int maxComp(int n)
 {
     int sum = 0;
     for (int k = 1; k <= n; ++k) {
@@ -60,15 +45,15 @@ int maxComp(int n)
     return sum;
 }
 
-void isSorted(std::list<std::list<int> > sequence, unsigned int argc) {
+static void isSorted(listlist sequence, unsigned int argc) {
 	if (argc - 1 != sequence.size())
 	{
 		std::cout << "You lost numbers along the way!" << std::endl;
 		return;
 	}
-		for (std::list<std::list<int> >::iterator it = sequence.begin(); it != --sequence.end();)
+		for (listlist::iterator it = sequence.begin(); it != --sequence.end();)
 	{
-		std::list<std::list<int> >::iterator previous = it++;
+		listlist::iterator previous = it++;
 		if (previous->back() > it->back()) {
 			std::cout << previous->back() << " " << it->back() << " Not sorted!" << std::endl;
 		}
@@ -80,10 +65,17 @@ void isSorted(std::list<std::list<int> > sequence, unsigned int argc) {
 int	main(int argc, char *argv[]) {
 	if (argc < 2)
 		return (0);
-	std::list<std::list<int> > sequence;
-	init_list(argv, sequence);
-	sequence = mergeInsert(sequence);
+	listlist sequence;
+	listPmergeMe::init_list(argv, sequence);
+	std::cout << "Original Sequence:" << std::endl;
+	print_list(sequence);
+	std::cout << std::endl;
+
+	sequence = listPmergeMe::mergeInsert(sequence);
+	std::cout << "----- FOR LISTS -----" << std::endl;
 	isSorted(sequence, argc);
 	print_list(sequence);
-	std::cout << "Comparisons: " << comparisons << " vs " << maxComp(sequence.size()) << std::endl;
+	std::cout << "Comparisons: " << comparisons << ", max: " << maxComp(sequence.size()) << std::endl;
+	std::cout << std::endl;
+
 }
