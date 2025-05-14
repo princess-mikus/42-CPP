@@ -1,3 +1,6 @@
+#ifndef EASYFIND_TPP
+#define EASYFIND_TPP
+
 #include "easyfind.hpp"
 
 template <typename T>
@@ -15,3 +18,4 @@ bool	easyfind(T &haystack, int needle) {
 	std::cerr << "Error: Not found!" << std::endl;
 	return (false);
 }
+#endif

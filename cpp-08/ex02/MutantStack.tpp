@@ -1,3 +1,6 @@
+#ifndef MUTANTSTACK_TPP
+#define MUTANTSTACK_TPP
+
 #include "MutantStack.hpp"
 
 template <typename T, typename C>
@@ -31,22 +34,22 @@ typename MutantStack<T, C>::iterator	MutantStack<T, C>::end() {
 }
 
 template <typename T, typename C>
-typename MutantStack<T, C>::reverse_iterator		MutantStack<T, C>::rbegin() {
+typename MutantStack<T, C>::reverse_iterator	MutantStack<T, C>::rbegin() {
 	return (this->c.rbegin());
 }
 
 template <typename T, typename C>
-typename MutantStack<T, C>::reverse_iterator		MutantStack<T, C>::rend() {
+typename MutantStack<T, C>::reverse_iterator	MutantStack<T, C>::rend() {
 	return (this->c.rend());
 }
 
 template <typename T, typename C>
-typename MutantStack<T, C>::const_iterator			MutantStack<T, C>::begin() const {
+typename MutantStack<T, C>::const_iterator	MutantStack<T, C>::begin() const {
 	return (this->c.begin());
 }
 
 template <typename T, typename C>
-typename MutantStack<T, C>::const_iterator			MutantStack<T, C>::end() const {
+typename MutantStack<T, C>::const_iterator	MutantStack<T, C>::end() const {
 	return (this->c.end());
 }
 
@@ -59,3 +62,5 @@ template <typename T, typename C>
 typename MutantStack<T, C>::const_reverse_iterator	MutantStack<T, C>::rend() const {
 	return (this->c.rend());
 }
+
+#endif

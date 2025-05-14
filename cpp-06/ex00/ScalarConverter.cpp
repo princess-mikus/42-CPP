@@ -19,10 +19,14 @@ ScalarConverter::~ScalarConverter() {
 }
 
 static bool isScalar(const std::string &literal) {
+	static bool e = false;
+
 	for (size_t i = 0; literal[i]; i++)
 	{
-		if ((!isdigit(literal[i]) || (literal[i] == 'f' && i != literal.size())) && literal[i] != '.' && literal[i] != '-' && literal[i] != '+')
+		if ((!isdigit(literal[i]) || (literal[i] == 'f' && i != literal.size())) && (literal[i] == 'e' && e) && literal[i] != '.' && literal[i] != '-' && literal[i] != '+')
 			return (false);
+		if (literal[i] == 'e')
+			e = true;
 	}
 	return (true);
 }

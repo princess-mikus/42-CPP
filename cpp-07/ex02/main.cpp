@@ -1,22 +1,54 @@
-#include "Array.tpp"
+#include <iostream>
+#include "Array.hpp"
+#include <cstdlib>
 
-int	main(void) {
-	Array<int>	array(3);
-	try {
-		std::cout << array[0] << std::endl;
-		std::cout << array[1] << std::endl;
-		array[2] = 48;
-		std::cout << array[2] << std::endl;
-		std::cout << array[3] << std::endl;
-	}
-	catch	(std::out_of_range	&e) {
-		std ::cout << e.what() << std::endl;
-	}
+#define MAX_VAL 750
+int main(int, char**)
+{
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-	Array<char> cArray;
-	cArray = array;
-	std::cout << cArray[2] << std::endl;
-	cArray[0] = 65;
-	std::cout << array[0] << " vs " << cArray[0] << std::endl;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
+    return 0;
 }

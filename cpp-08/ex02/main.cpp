@@ -1,4 +1,4 @@
-#include "MutantStack.tpp"
+#include "MutantStack.hpp"
 
 int main(void) {
 	MutantStack<> ttmp;

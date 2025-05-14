@@ -2,6 +2,7 @@
 #define PMERGME_HPP
 
 #include <list>
+#include <deque>
 #include <iostream>
 #include <utility>
 #include <cstdlib>
@@ -32,6 +33,7 @@ typedef std::list<std::list<std::list <int> >::iterator > iteratorlistlist;
 namespace listPmergeMe
 {
 	void 		init_list(char *argv[], listlist &sequence);
+	bool		comp(const int first, const std::list<int> second);
 	listlist	merge(listlist lst);
 	listlist	halve(listlist lst);
 	void		constructMainPend(listlist lst, listlist &main, listlist &pend, 
@@ -40,15 +42,21 @@ namespace listPmergeMe
 	listlist	mergeInsert(listlist lst);
 }
 
+typedef std::deque<std::deque<int> > deckdeck;
+typedef std::deque<std::deque<std::deque <int> >::iterator > iteratordeckdeck;
+
+
 namespace dequePmergeMe
 {
-	void 		init_list(char *argv[], listlist &sequence);
-	listlist	merge(listlist lst);
-	listlist	halve(listlist lst);
-	void		constructMainPend(listlist lst, listlist &main, listlist &pend, 
-									iteratorlistlist &pairs, std::list<int> rest);
-	listlist	insert(listlist &main, listlist pend, iteratorlistlist pairs);
-	listlist	mergeInsert(listlist lst);
+	std::deque<int>	splice(std::deque<int> &deck, std::deque<int>::iterator first, std::deque<int>::iterator last);
+	void 		init_deck(char *argv[], deckdeck &sequence);
+	bool		comp(const int first, const std::deque<int> second);
+	deckdeck	merge(deckdeck lst);
+	deckdeck	halve(deckdeck lst);
+	void		constructMainPend(deckdeck lst, deckdeck &main, deckdeck &pend, 
+									iteratordeckdeck &pairs, std::deque<int> rest);
+	deckdeck	insert(deckdeck &main, deckdeck pend/*, iteratordeckdeck pairs*/);
+	deckdeck	mergeInsert(deckdeck lst);
 }
 
 #endif

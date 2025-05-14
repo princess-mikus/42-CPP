@@ -7,7 +7,7 @@ static int nextJacobsthal(int n_jacobsthal)
 	return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
 }
 
-static bool _comp(const int first, const std::list<int> second)
+bool listPmergeMe::comp(const int first, const std::list<int> second)
 {
 	comparisons++;
 	return(first < second.back());
@@ -108,7 +108,7 @@ listlist	listPmergeMe::insert(listlist &main, listlist pend, iteratorlistlist pa
 		}
 		for (; pendIt != --pend.begin();)
 		{
-			main.insert(std::upper_bound(main.begin(), *pairIt, pendIt->back(), _comp), *pendIt);
+			main.insert(std::upper_bound(main.begin(), *pairIt, pendIt->back(), comp), *pendIt);
 			listlist::iterator tempPendIt = pendIt--;
 			pend.erase(tempPendIt);
 			iteratorlistlist::iterator tempPairIt = pairIt--;

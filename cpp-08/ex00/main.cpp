@@ -1,4 +1,4 @@
-#include "easyfind.tpp"
+#include "easyfind.hpp"
 
 int	main(void) {
 	std::vector<int> vec = std::vector<int>({1, 2, 3});

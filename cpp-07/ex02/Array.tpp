@@ -34,15 +34,6 @@ Array<T>	&Array<T>::operator=(const Array<T> &model) {
 	return *this;
 }
 
-template <typename T, class = typename std::enable_if<std::is_same<T, int>::value>::type>>
-Array<T>	&operator=(const Array<int> &model) {
-	data = new char[model.size()];
-	_size = model.size();
-	for (unsigned int i = 0; i < _size; i++)
-		data[i] = static_cast<char>(model.getData(i));
-	return *this;
-}
-
 template <typename T>
 Array<T>::~Array() {
 	delete[] data;

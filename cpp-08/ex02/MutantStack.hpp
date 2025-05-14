@@ -1,3 +1,6 @@
+#ifndef MUTANSTACK_HPP
+#define MUTANSTACK_HPP
+
 #include <iostream>
 #include <stack>
 #include <list>
@@ -32,3 +35,4 @@ class MutantStack: public std::stack<T, C>
 		~MutantStack();
 };
 	
+#endif

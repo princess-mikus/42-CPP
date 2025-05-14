@@ -65,17 +65,24 @@ static void isSorted(listlist sequence, unsigned int argc) {
 int	main(int argc, char *argv[]) {
 	if (argc < 2)
 		return (0);
-	listlist sequence;
-	listPmergeMe::init_list(argv, sequence);
+	listlist lSequence;
+	listPmergeMe::init_list(argv, lSequence);
 	std::cout << "Original Sequence:" << std::endl;
-	print_list(sequence);
+	print_list(lSequence);
 	std::cout << std::endl;
 
-	sequence = listPmergeMe::mergeInsert(sequence);
+	lSequence = listPmergeMe::mergeInsert(lSequence);
 	std::cout << "----- FOR LISTS -----" << std::endl;
-	isSorted(sequence, argc);
-	print_list(sequence);
-	std::cout << "Comparisons: " << comparisons << ", max: " << maxComp(sequence.size()) << std::endl;
+	isSorted(lSequence, argc);
+	print_list(lSequence);
+	std::cout << "Comparisons: " << comparisons << ", max: " << maxComp(lSequence.size()) << std::endl;
+	std::cout << std::endl;
+
+	deckdeck dSequence;
+	dequePmergeMe::init_deck(argv, dSequence);
+	dSequence = dequePmergeMe::mergeInsert(dSequence);
+	std::cout << "----- FOR DEQUE -----" << std::endl;
+	std::cout << "Comparisons: " << comparisons << ", max: " << maxComp(dSequence.size()) << std::endl;
 	std::cout << std::endl;
 
 }
