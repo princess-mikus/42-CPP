@@ -9,6 +9,9 @@ int main()
     
 const Animal		*animals[100];
 
+	Cat	cat1;
+	Cat	cat2;
+
 	for (size_t i = 0; i < 100; i++)
 	{
 		if (i % 2)
