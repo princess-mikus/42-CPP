@@ -81,7 +81,7 @@ void	listPmergeMe::constructMainPend(listlist lst, listlist &main, listlist &pen
 		}
 	}
 
-	if (rest.size())
+	if (!rest.empty())
 	{
 		pend.push_back(rest);
 		pairs.push_back(main.end());

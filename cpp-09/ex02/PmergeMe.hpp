@@ -1,5 +1,5 @@
-#ifndef PMERGE_HPP
-#define PMERGME_HPP
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
 #include <list>
 #include <deque>
@@ -51,12 +51,14 @@ namespace dequePmergeMe
 	std::deque<int>	splice(std::deque<int> &deck, std::deque<int>::iterator first, std::deque<int>::iterator last);
 	void 		init_deck(char *argv[], deckdeck &sequence);
 	bool		comp(const int first, const std::deque<int> second);
-	deckdeck	merge(deckdeck lst);
-	deckdeck	halve(deckdeck lst);
-	void		constructMainPend(deckdeck lst, deckdeck &main, deckdeck &pend, 
+	deckdeck	merge(deckdeck deck);
+	deckdeck	halve(deckdeck deck);
+	void		constructMainPend(deckdeck deck, deckdeck &main, deckdeck &pend, 
 									iteratordeckdeck &pairs, std::deque<int> rest);
 	deckdeck	insert(deckdeck &main, deckdeck pend/*, iteratordeckdeck pairs*/);
-	deckdeck	mergeInsert(deckdeck lst);
+	deckdeck	mergeInsert(deckdeck deck);
 }
+
+void	print_deck(deckdeck deck);
 
 #endif

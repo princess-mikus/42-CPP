@@ -2,6 +2,7 @@
 
 extern int comparisons;
 
+
 static int nextJacobsthal(int n_jacobsthal)
 {
 	return(((pow(2, n_jacobsthal)) - (pow(-1, n_jacobsthal))) / 3);
@@ -27,6 +28,7 @@ bool dequePmergeMe::comp(const int first, const std::deque<int> second)
 	return(first < second.back());
 }
 
+
 void	dequePmergeMe::init_deck(char *argv[], deckdeck &sequence) {
 	std::deque<int>	start;
 
@@ -43,122 +45,93 @@ void	dequePmergeMe::init_deck(char *argv[], deckdeck &sequence) {
 }
 
 deckdeck	dequePmergeMe::merge(deckdeck deck) {
-	deckdeck newDeck;
+	deckdeck	newDeck;
 
-	for (deckdeck::iterator it = deck.begin(); it != deck.end(); it++)
-	{
-		deckdeck::iterator first = it++;
-		deckdeck::iterator second = it;
-		std::deque<int> temp;
-		comparisons++;
+	while (!deck.empty()) {
+		deckdeck::iterator	second = deck.begin();
+		deckdeck::iterator	first = second++;
+		std::deque<int>	temp;
+
 		if (first->back() < second->back()) {
-			temp = *first;
-			temp = dequePmergeMe::splice(*second, second->begin(), second->end());
+			temp.insert(temp.end(), first->begin(), first->end());
+			temp.insert(temp.end(), second->begin(), second->end());
 		}
 		else {
-			temp = *second;
-			temp = dequePmergeMe::splice(*second, first->begin(), first->end());
+			temp.insert(temp.end(), second->begin(), second->end());
+			temp.insert(temp.end(), first->begin(), first->end());
 		}
+		deck.pop_front();
+		deck.pop_front();
 		newDeck.push_back(temp);
 	}
-
+	
 	return (newDeck);
 }
 
 deckdeck	dequePmergeMe::halve(deckdeck deck) {
-	deckdeck newDeck;
+	deckdeck	newDeck;
 
-	for (deckdeck::iterator it = deck.begin(); it != deck.end(); it++)
-	{
-		std::deque<int> temp;
-		std::deque<int>::iterator it2 = it->begin();
+	while (!deck.empty()) {
+		std::deque<int>	firstHalf;
+		std::deque<int>	secondHalf;
 
-		std::advance(it2, it->size() / 2);
-		temp = dequePmergeMe::splice(*it, it2, it->end());
-		newDeck.push_back(*it);
-		newDeck.push_back(temp);
+		size_t	halfDeck = 2;
+		if (deck.begin()->size() > 1)
+		halfDeck = deck.begin()->size() / 2;
+		
+		for (size_t i = 0; i < halfDeck; i++)
+		{
+			firstHalf.push_back(deck.begin()->front());
+			deck.begin()->pop_front();
+		}
+		while (!deck.begin()->empty()) {
+			secondHalf.push_back(deck.begin()->front());
+			deck.begin()->pop_front();
+		}
+		newDeck.push_back(firstHalf);
+		newDeck.push_back(secondHalf);
+		deck.pop_front();
 	}
+	print_deck(newDeck);
 	return (newDeck);
 }
 
-void	dequePmergeMe::constructMainPend(deckdeck lst, deckdeck &main, deckdeck &pend, iteratordeckdeck &pairs, std::deque<int> rest) {
-	size_t i = 0;
-	for (deckdeck::iterator it = lst.begin(); it != lst.end(); it++)
+void	dequePmergeMe::constructMainPend(deckdeck deck, deckdeck &main, deckdeck &pend, 
+									iteratordeckdeck &pairs, std::deque<int> rest) {
+	for (deckdeck::iterator it; i < count; i++)
 	{
-		if (it != lst.begin() && !(std::distance(lst.begin(), it) % 2)) {
-			pend.push_back(*it);
-		}
-		else {
-			main.push_back(*it);
-			if (i++ > 1)
-				pairs.push_back(--main.end());
-		}
+		/* code */
 	}
 
-	if (rest.size())
-	{
-		pend.push_back(rest);
-		pairs.push_back(main.end());
-	}
 }
 
-deckdeck	dequePmergeMe::insert(deckdeck &main, deckdeck pend/*, iteratordeckdeck pairs*/) {
-	unsigned int jacobsthalPos = 3 - 1;
-	unsigned int jacobsthalPrevPos = 1; 
-	size_t jacobsthalN = 3;
-
-	//iteratordeckdeck::iterator pairIt = pairs.begin();
-	for (deckdeck::iterator pendIt = pend.begin(); !pend.empty();)
-	{
-		if (jacobsthalPos - jacobsthalPrevPos > pend.size())
-		{
-			std::advance(pendIt, pend.size());
-			//std::advance(pairIt, pend.size());
-		}
-		else
-		{
-			std::advance(pendIt, jacobsthalPos - jacobsthalPrevPos);
-			//std::advance(pairIt, jacobsthalPos - jacobsthalPrevPos);
-		}
-		for (; pendIt != --pend.begin();)
-		{
-			main.insert(std::upper_bound(main.begin(), main.end(), pendIt->back(), comp), *pendIt);
-			deckdeck::iterator tempPendIt = pendIt--;
-			pend.erase(tempPendIt);
-			//iteratordeckdeck::iterator tempPairIt = pairIt--;
-			//pairs.erase(tempPairIt);
-		}
-		jacobsthalPrevPos = jacobsthalPos;
-		jacobsthalPos = nextJacobsthal(++jacobsthalN) - 1;
-	}
-
-	return (main);
-}
-
-deckdeck	dequePmergeMe::mergeInsert(deckdeck lst) {
+deckdeck	dequePmergeMe::mergeInsert(deckdeck deck) {
 	std::deque<int> rest;
 
-	if (lst.size() % 2) {
-		rest = lst.back();
-		lst.pop_back();
+	if (deck.size() % 2) {
+		rest = deck.back();
+		deck.pop_back();
 	}
 
-	lst = dequePmergeMe::merge(lst);
+	deck = dequePmergeMe::merge(deck);
 
-	if (lst.size() > 1)
-		lst = mergeInsert(lst);
-
-	lst = dequePmergeMe::halve(lst);
-
-	if (lst.size() < 2)
-		return (lst);
+	if (deck.size() > 1)
+		deck = mergeInsert(deck);
+	
+	print_deck(deck);
+	std::cout << std::endl << std::endl;
+	deck = dequePmergeMe::halve(deck);
+	
+	if (deck.size() < 2)
+		return (deck);	
 
 	deckdeck			main;
 	deckdeck			pend;
 	iteratordeckdeck	pairs;
 	
-	dequePmergeMe::constructMainPend(lst, main, pend, pairs, rest);
-	dequePmergeMe::insert(main, pend);
+	dequePmergeMe::constructMainPend(deck, main, pend, pairs, rest);
+	//dequePmergeMe::insert(main, pend);
 
 	return (main);
+
 }
