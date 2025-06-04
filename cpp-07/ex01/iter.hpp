@@ -1,3 +1,6 @@
+#ifndef ITER_HPP
+#define ITER_HPP
+
 #include <iostream>
 #include <string.h>
 
@@ -22,3 +25,5 @@ void	getType(T const &c) {
 	else
 		std::cout << "Another character!" << std::endl;
 }
+
+#endif
