@@ -2,6 +2,7 @@
 #define WHATEVER_HPP
 
 #include <iostream>
+#include <typeinfo>
 
 template <typename T>
 void	swap(T &var1, T &var2) {

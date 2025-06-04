@@ -14,6 +14,7 @@ void	iter(T *array, size_t lenght, void (*function)(T const &)) {
 
 template <typename T>
 void	getType(T const &c) {
+	std::cout << c << ": ";
 	if (isdigit(c))
 		std::cout << "Digit!" << std::endl;
 	else if (!isprint(c))

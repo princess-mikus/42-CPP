@@ -48,13 +48,31 @@ T	&Array<T>::operator[](unsigned int n) {
 }
 
 template <typename T>
-unsigned int	Array<T>::size() const {
+T	Array<T>::operator[](unsigned int n) const {
+	if (n >= _size) {
+		throw std::out_of_range("Exception: Position not mapped in the array!");
+	}
+	return (*(data + n));
+}
+
+template <typename T>
+size_t	Array<T>::size() const {
 	return (_size);
 }
 
 template <typename T>
 T	Array<T>::getData(unsigned int idx) const {
 	return(data[idx]);
+}
+
+template<typename T>
+std::ostream	&operator<<(std::ostream &stream, const Array<T> &array) {
+	for (size_t i = 0; i < array.size(); i++)
+	{
+		stream << array[i];
+	}
+
+	return (stream);
 }
 
 #endif

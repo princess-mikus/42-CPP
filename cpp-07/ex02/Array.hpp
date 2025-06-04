@@ -4,8 +4,8 @@
 #include <iostream>
 #include <exception>
 #include <stdexcept>
-#include <typeinfo>
-#include <type_traits>
+#include <cstring>
+#include <cstdlib>
 
 template <typename T>
 class Array
@@ -20,9 +20,13 @@ class Array
 			Array	&operator=(const Array &model);
 			~Array();
 			T	&operator[ ](unsigned int n);
-			unsigned int size() const;
+			T	operator[ ](unsigned int n) const;
+			size_t size() const;
 			T	getData(unsigned int idx) const;
 };
+
+template<typename T>
+std::ostream	&operator<<(std::ostream &stream, const Array<T> &array);
 
 #include "Array.tpp"
 
