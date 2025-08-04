@@ -1,6 +1,10 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
+#ifndef MAIN
+ #define MAIN 0
+#endif
+
 #include <iostream>
 #include <exception>
 #include <stdexcept>

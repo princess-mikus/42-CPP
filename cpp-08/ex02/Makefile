@@ -1,4 +1,4 @@
-NAME = array
+NAME = mutant_stack
 
 SRC = main.cpp
 OBJ = $(SRC:%.cpp=%.o)
@@ -8,7 +8,8 @@ CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-42: CPPFLAGS+=-DMAIN=42 $(NAME)
+42: CPPFLAGS+=-DMAIN=42
+42: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
@@ -24,4 +25,4 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all 42 clean fclean re

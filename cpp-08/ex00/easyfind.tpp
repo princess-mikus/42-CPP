@@ -4,18 +4,15 @@
 #include "easyfind.hpp"
 
 template <typename T>
-bool	easyfind(T &haystack, int needle) {
-
-	(void)needle;	
-	for(typename T::iterator	it = haystack.begin(); it != haystack.end(); it++)
-	{
-		if (*it == needle)
-		{
-			std::cout << *it << " found at " << std::distance(haystack.begin(), it) << std::endl;
-			return (true);
-		}
+void	easyfind(T &haystack, int needle) {
+	typename T::iterator it = find(haystack.begin(), haystack.end(), needle);
+	if (it != haystack.end())
+		std::cout << *it << " found at " << std::distance(haystack.begin(), it) << std::endl;
+	else {
+		std::stringstream	ss;
+		ss << needle;
+		throw std::runtime_error("Member " + ss.str() + " not found");
 	}
-	std::cerr << "Error: Not found!" << std::endl;
-	return (false);
 }
+
 #endif

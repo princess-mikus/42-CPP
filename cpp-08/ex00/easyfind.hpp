@@ -6,6 +6,7 @@
 #include <list>
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 
 #include "easyfind.tpp"
 #endif

@@ -21,7 +21,7 @@ Span::~Span() {
 	
 }
 
-void			Span::addNumber(int n) {
+void	Span::addNumber(int n) {
 	if (_vec.size() == _vec.capacity())
 		throw std::out_of_range("No more capacity in the vector");
 	_vec.push_back(n);
@@ -39,6 +39,7 @@ unsigned int	Span::shortestSpan() {
 		if ((unsigned int)(*(it + 1) - *it) < span)
 			span = (unsigned int)(*(it + 1) - *it);
 	}
+
 	return (span);
 }
 
@@ -50,3 +51,4 @@ unsigned int	Span::longestSpan() {
 	
 	return (tmp.back() - tmp.front());
 }
+

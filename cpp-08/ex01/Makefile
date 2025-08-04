@@ -1,14 +1,12 @@
-NAME = array
+NAME = span
 
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 OBJ = $(SRC:%.cpp=%.o)
 CC = c++
 RM = rm -f
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
-
-42: CPPFLAGS+=-DMAIN=42 $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)

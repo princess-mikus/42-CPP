@@ -2,22 +2,6 @@
 
 static bool wrong = false;
 
-ScalarConverter::ScalarConverter() {
-}
-
-ScalarConverter::ScalarConverter(const ScalarConverter &model) {
-	(void)model;
-}
-
-ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &model) {
-	(void)model;
-	return *this;
-}
-
-ScalarConverter::~ScalarConverter() {
-
-}
-
 static bool isScalar(const std::string &literal) {
 	static bool e = false;
 
