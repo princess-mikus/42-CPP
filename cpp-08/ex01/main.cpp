@@ -35,7 +35,7 @@ int	main(void) {
 		vec.push_back(i);
 	}
 
-	sp2.addRange<std::vector>(vec.begin(), vec.end());
+	sp2.addRange<std::vector<int> >(vec.begin(), vec.end());
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
 
