@@ -52,13 +52,14 @@ Written in C++98.
 <h3>CPP 07: Templates </h3>
 <ul>
   <li> Function and class templates </li>
-  <li> Custom container implementation (Stack reimplementation) </li>
+  <li> Introduction to generic programming </li>
 </ul>
 
 <h3>CPP 08: STL </h3>
 <ul>
   <li> Deep dive into the Standard Template Library (STL) </li>
-  <li> Introduction to generic programming and the STL </li>
+  <li> Custom container implementation (Stack reimplementation) </li>
+  <li> Introduction to the algorithm library </li>
 </ul>
 
 <h3>CPP 09: Algorithms </h3>
